@@ -26,7 +26,7 @@ public class Usuario extends Persona{
 
     @Override
     public String toString() {
-        return "Usuario{" + "contrase\u00f1a=" + contraseña + '}';
+        return "Usuario{" + "contrase\u00f1a=" + contraseña + super.toString() + '}';
     }
 
     
