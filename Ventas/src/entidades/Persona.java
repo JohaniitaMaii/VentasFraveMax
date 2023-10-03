@@ -5,14 +5,21 @@ package entidades;
  * @author johan
  */
 public class Persona {
-    
-    private String nombre;
+
     private String apellido;
+    private String nombre;
     private String domicilio;
     private String telefono;
     private Persona clase;
 
     public Persona() {
+    }
+
+    public Persona(String apellido, String nombre, String domicilio, String telefono) {
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
     }
 
     public Persona(String nombre, String apellido, String domicilio, String telefono, Persona clase) {
@@ -65,11 +72,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + ", domicilio=" + domicilio + ", telefono=" + telefono + ", clase=" + clase + '}';
+        return "Nombre= " + nombre + ", Apellido= " + apellido + ", Domicilio= " + domicilio + ", Telefono= " + telefono ;
     }
-    
-    
-    
-    
-    
+
 }
