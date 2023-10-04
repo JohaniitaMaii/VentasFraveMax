@@ -12,8 +12,7 @@ public class Producto {
    private int stock;
    private boolean estado;
 
-    public Producto() {
-    }
+    
 
     public Producto(int idProducto) {
         this.idProducto = idProducto;
