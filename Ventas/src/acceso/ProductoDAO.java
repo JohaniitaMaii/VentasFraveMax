@@ -151,21 +151,23 @@ public class ProductoDAO {
         }
         return pb;
     }
-    
-    public List<Producto> listaProductosporID(int id){//LISTAS DE PRODUCTOS POR CLIENTE
+
+    public List<Producto> listaProductosporID(int id) {//LISTAS DE PRODUCTOS POR CLIENTE
 
         Producto producto = null;
         List<Producto> productos = new ArrayList();
-        
+
         try {
             conn = conexion.conexionDB();
-            sql = "";
+            sql = "SELECT producto.id_producto, producto.nombreProducto, producto.descripcion, "
+                    + "producto.precioActual, producto.stock, producto.estado FROM producto "
+                    + "JOIN venta ON producto.id_producto = venta.id_producto WHERE venta.id_cliente = "+id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 producto = new Producto();
-                producto.setIdProducto(id);
+                producto.setIdProducto(rs.getInt("id_producto"));
                 producto.setNombreProducto(rs.getString("nombreProducto"));
                 producto.setDescripcion(rs.getString("descripcion"));
                 producto.setPrecioActual(rs.getDouble("precioActual"));
@@ -173,24 +175,17 @@ public class ProductoDAO {
                 producto.setEstado(rs.getBoolean("estado"));
                 productos.add(producto);
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al Listar productos por id cliente");
-        }finally {
+        } finally {
             try {
                 conexion.desconectar();
             } catch (Exception ex) {
                 System.out.println("Error al desconectar");
             }
         }
-        
-        
-        
-        
-        
-        
-        
-       return productos; 
+        return productos;
     }
 
 }
