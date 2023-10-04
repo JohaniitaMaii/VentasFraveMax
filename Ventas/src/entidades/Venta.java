@@ -1,5 +1,6 @@
 package entidades;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -11,18 +12,22 @@ public class Venta {
     private int idVenta;
     private Cliente cliente;
     private Producto producto;
-    private LocalDate fechaVenta;
+    private Date fechaVenta;
 
     public Venta() {
     }
 
-    public Venta(Cliente cliente, Producto producto, LocalDate fechaVenta) {
+    public Venta(int idVenta) {
+        this.idVenta = idVenta;
+    }
+
+    public Venta(Cliente cliente, Producto producto, Date fechaVenta) {
         this.cliente = cliente;
         this.producto = producto;
         this.fechaVenta = fechaVenta;
     }
 
-    public Venta(int idVenta, Cliente cliente, Producto producto, LocalDate fechaVenta) {
+    public Venta(int idVenta, Cliente cliente, Producto producto, Date fechaVenta) {
         this.idVenta = idVenta;
         this.cliente = cliente;
         this.producto = producto;
@@ -53,19 +58,17 @@ public class Venta {
         this.cliente = cliente;
     }
 
-    public LocalDate getFechaVenta() {
+    public Date getFechaVenta() {
         return fechaVenta;
     }
 
-    public void setFechaVenta(LocalDate fechaVenta) {
+    public void setFechaVenta(Date fechaVenta) {
         this.fechaVenta = fechaVenta;
     }
 
     @Override
     public String toString() {
-        return "Venta: " + "Id Venta= " + idVenta + ", Cliente= " + cliente.getIdCliente()+ ", Producto= " + producto.getIdProducto() + ", Fecha Venta= " + fechaVenta;
+        return "Venta: " + "Id Venta= " + idVenta + ", Cliente= " + cliente.getIdCliente() + ", Producto= " + producto.getIdProducto() + ", Fecha Venta= " + fechaVenta;
     }
-
-    
 
 }

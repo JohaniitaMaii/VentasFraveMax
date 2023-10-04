@@ -5,6 +5,7 @@ import acceso.ProductoDAO;
 import acceso.VentaDAO;
 import entidades.Cliente;
 import entidades.Producto;
+import entidades.Venta;
 
 /**
  *
@@ -45,7 +46,32 @@ public class Ventas {
         
         //--------------------------------------------------------------------------------------
         
-        VentaDAO vendao = new VentaDAO();
+        VentaDAO vedao = new VentaDAO();
+
+        Venta venta = new Venta(9);
+
+//        vedao.insertarVenta(venta);//--------------INSERTAR UNA VENTA
+//        vedao.modificarVenta(venta);//--------------MODIFICAR UNA VENTA
+//        vedao.eliminarVenta(venta);//--------------ELIMINAR UNA VENTA
+
+        System.out.println("");
+        System.out.println("Lista de Ventas");//------------------LISTAR LAS VENTAS
+        for (Venta ve : vedao.listarVentas()) {
+            System.out.println(ve);
+        }
+
+        System.out.println("");
+        System.out.println("Obtener Ventas por ID");//-----OBTENER VENTAS POR ID CLIENTE
+        for (Venta ve : vedao.obtenerVentasPorID(1)) {
+            System.out.println(ve);
+        }
+
+        System.out.println("");
+        System.out.println("Listar Clientes por ID de Productos ");
+        for (Cliente cli : vedao.obtenerClientesporProducto(5)) {//------------LISTAR LOS CLIENTES POR ID PRODUCTOS
+            System.out.println(cli);
+        }
+
         
         
         
