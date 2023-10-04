@@ -15,6 +15,10 @@ public class Persona {
     public Persona() {
     }
 
+    public Persona(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Persona(String apellido, String nombre, String domicilio, String telefono) {
         this.apellido = apellido;
         this.nombre = nombre;
@@ -72,7 +76,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Nombre= " + nombre + ", Apellido= " + apellido + ", Domicilio= " + domicilio + ", Telefono= " + telefono ;
+        return "Nombre= " + nombre + ", Apellido= " + apellido + ", Domicilio= " + domicilio + ", Telefono= " + telefono;
     }
 
 }

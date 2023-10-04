@@ -11,6 +11,11 @@ public class Usuario extends Persona{
     public Usuario() {
     }
 
+    public Usuario(String contraseña, String nombre) {
+        super(nombre);
+        this.contraseña = contraseña;
+    }
+
     public Usuario(String contraseña, String nombre, String apellido, String domicilio, String telefono, Persona clase) {
         super(nombre, apellido, domicilio, telefono, clase);
         this.contraseña = contraseña;
@@ -26,7 +31,7 @@ public class Usuario extends Persona{
 
     @Override
     public String toString() {
-        return "Usuario{" + "contrase\u00f1a=" + contraseña + super.toString() + '}';
+        return "Usuario: " +super.getNombre() +" Contraseña: "+ contraseña;
     }
 
     

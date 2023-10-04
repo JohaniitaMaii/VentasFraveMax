@@ -151,5 +151,46 @@ public class ProductoDAO {
         }
         return pb;
     }
+    
+    public List<Producto> listaProductosporID(int id){//LISTAS DE PRODUCTOS POR CLIENTE
+
+        Producto producto = null;
+        List<Producto> productos = new ArrayList();
+        
+        try {
+            conn = conexion.conexionDB();
+            sql = "";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                producto = new Producto();
+                producto.setIdProducto(id);
+                producto.setNombreProducto(rs.getString("nombreProducto"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                productos.add(producto);
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Listar productos por id cliente");
+        }finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+       return productos; 
+    }
 
 }
