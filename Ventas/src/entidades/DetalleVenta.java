@@ -5,19 +5,24 @@ package entidades;
  * @author johan
  */
 public class DetalleVenta {
-    
+
     private int idDetalle;
     private int cantidad;
     private Venta venta;
-    private double precioVenta;
-    private Producto producto;
+    private double precioTotal;
 
-    public DetalleVenta(int idDetalle, int cantidad, Venta venta, double precioVenta, Producto producto) {
+    public DetalleVenta() {
+    }
+
+    public DetalleVenta(Venta venta) {
+        this.venta = venta;
+    }
+
+    public DetalleVenta(int idDetalle, int cantidad, Venta venta, double precioTotal) {
         this.idDetalle = idDetalle;
         this.cantidad = cantidad;
         this.venta = venta;
-        this.precioVenta = precioVenta;
-        this.producto = producto;
+        this.precioTotal = precioTotal;
     }
 
     public int getIdDetalle() {
@@ -44,26 +49,17 @@ public class DetalleVenta {
         this.venta = venta;
     }
 
-    public double getPrecioVenta() {
-        return precioVenta;
+    public double getPrecioTotal() {
+        return precioTotal;
     }
 
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    public Producto getProducto() {
-        return producto;
-    }
-
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "idDetalle=" + idDetalle + ", cantidad=" + cantidad + ", venta=" + venta + ", precioVenta=" + precioVenta + ", producto=" + producto + '}';
+        return "Detalle Venta: " + "ID Detalle: " + idDetalle + ", Venta: " + venta.getIdVenta() + ", Cantidad: " + cantidad + ", Precio Total: " + precioTotal;
     }
-    
-    
+
 }

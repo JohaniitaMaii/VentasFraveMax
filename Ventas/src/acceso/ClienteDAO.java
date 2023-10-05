@@ -137,7 +137,6 @@ public class ClienteDAO {
                 cliente.setDomicilio(rs.getString("domicilio"));
                 cliente.setTelefono(rs.getString("telefono"));
             }
-            System.out.println("Cliente en la Base de Datos");
         } catch (SQLException e) {
             System.out.println("El Cliente no se encuentra en el Sistema");
         } finally {
