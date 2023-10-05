@@ -21,6 +21,11 @@ public class Venta {
         this.idVenta = idVenta;
     }
 
+    public Venta(Cliente cliente, Producto producto) {
+        this.cliente = cliente;
+        this.producto = producto;
+    }
+
     public Venta(Cliente cliente, Producto producto, Date fechaVenta) {
         this.cliente = cliente;
         this.producto = producto;

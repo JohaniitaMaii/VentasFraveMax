@@ -1,10 +1,12 @@
 package ventasMain;
 
 import acceso.ClienteDAO;
+import acceso.DetalleVentaDAO;
 import acceso.ProductoDAO;
 import acceso.UsuarioDAO;
 import acceso.VentaDAO;
 import entidades.Cliente;
+import entidades.DetalleVenta;
 import entidades.Producto;
 import entidades.Venta;
 import java.sql.Date;
@@ -32,6 +34,11 @@ public class VentasMain {
 //        }
 ////        
 //        System.out.println(pedao.buscarPorNombre("Lavarropa")); //BUSCAR PRODUCTO POR NOMBRE
+//        System.out.println("Lista de Productos por ID Cliente");
+//        for (Producto produ : pedao.listaProductosporID(1)) {
+//            System.out.println(produ);
+//        }
+
         System.out.println("");
 //-------------------------------------------------------------------------------------------------------------
         ClienteDAO clidao = new ClienteDAO();
@@ -45,7 +52,6 @@ public class VentasMain {
 //        for (Cliente cli : clidao.listarClientes()) {
 //            System.out.println(cli);
 //        }
-
         //--------------------------------------------------------------------------------------
         VentaDAO vedao = new VentaDAO();
 
@@ -55,13 +61,13 @@ public class VentasMain {
 //        vedao.modificarVenta(venta);//--------------MODIFICAR UNA VENTA
 //        vedao.eliminarVenta(venta);//--------------ELIMINAR UNA VENTA
 //        System.out.println("");
-//        System.out.println("Lista de VentasMain");//------------------LISTAR LAS VENTAS
+//        System.out.println("Lista de Ventas");//------------------LISTAR LAS VENTAS
 //        for (Venta ve : vedao.listarVentas()) {
 //            System.out.println(ve);
 //        }
 //
 //        System.out.println("");
-//        System.out.println("Obtener VentasMain por ID");//-----OBTENER VENTAS POR ID CLIENTE
+//        System.out.println("Obtener Ventas por ID");//-----OBTENER VENTAS POR ID CLIENTE
 //        for (Venta ve : vedao.obtenerVentasPorID(1)) {
 //            System.out.println(ve);
 //        }
@@ -73,8 +79,19 @@ public class VentasMain {
 //        }
 //-------------------------------------------------------------------------------------------------------------------
         UsuarioDAO udao = new UsuarioDAO();
-        
-        System.out.println(udao.ingresoLogin("Soledad Lazzaroni", "SL123"));
+//        
+//        System.out.println(udao.ingresoLogin("Soledad Lazzaroni", "SL123"));//-------------LOGUEA EL USUARIO
+
+//--------------------------------------------------------------------------------------------------------------------
+        DetalleVentaDAO detadao = new DetalleVentaDAO();
+        Venta ven = new Venta();
+        Cliente clin = new Cliente();
+        for (DetalleVenta deta : detadao.listarDetalleVentas()) {//-----------------LISTA DE DETALLES DE VENTAS
+            System.out.println(deta);
+//            ven = vedao.listarVentasID(deta.getVenta().getIdVenta());
+//            clin = clidao.buscarPorID(ven.getCliente().getIdCliente());
+//            System.out.println(clin.getNombre());
+        }
 
     }
 

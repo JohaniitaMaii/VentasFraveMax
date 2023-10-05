@@ -200,6 +200,38 @@ public class VentaDAO {
         return clientes;
     }
 
+    //--------------------------------------------------------------------------------------------------------------
     
-    
+    public Venta listarVentasID(int id) {
+        Venta venta = null;
+        Cliente cliente = null;
+        Producto producto = null;
+        Date fecha = new Date(0, 0, 0);
+
+        try {
+            conn = conexion.conexionDB();
+            sql = "SELECT * FROM venta WHERE id_venta = "+id;
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cliente = new Cliente();
+                producto = new Producto();
+                venta = new Venta(cliente, producto, fecha);
+                venta.setIdVenta(rs.getInt("id_venta"));
+                venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
+                venta.getProducto().setIdProducto(rs.getInt("id_producto"));
+                venta.setFechaVenta(rs.getDate("fechadeVenta"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar las Ventas");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+        return venta;
+    }
 }
