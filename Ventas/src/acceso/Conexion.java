@@ -19,7 +19,7 @@ public class Conexion {
     private static final String URL = "jdbc:mariadb://localhost/";
     private static final String DB = "fravemax";
     private static final String USER = "root";
-    private static final String PASS = "5872";
+    private static final String PASS = "";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
 
     public Connection conexionDB() throws SQLException {

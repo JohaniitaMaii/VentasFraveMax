@@ -5,20 +5,21 @@ package entidades;
  * @author johan
  */
 public class Producto {
-   private int idProducto;
-   private String nombreProducto;
-   private String descripcion;
-   private double precioActual;
-   private int stock;
-   private boolean estado;
 
-    
+    private int idProducto;
+    private String nombreProducto;
+    private String descripcion;
+    private double precioActual;
+    private int stock;
+    private boolean estado;
+
+    public Producto() {
+    }
 
     public Producto(int idProducto) {
         this.idProducto = idProducto;
     }
 
-    
     public Producto(String nombreProducto, String descripcion, double precioActual, int stock, boolean estado) {
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
@@ -27,8 +28,6 @@ public class Producto {
         this.estado = estado;
     }
 
-    
-    
     public Producto(int idProducto, String nombreProducto, String descripcion, double precioActual, int stock, boolean estado) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
@@ -90,6 +89,5 @@ public class Producto {
     public String toString() {
         return "Producto: " + "Id Producto= " + idProducto + ", Nombre Producto= " + nombreProducto + ", Descripcion= " + descripcion + ", Precio Actual= " + precioActual + ", Stock= " + stock + ", Estado= " + estado;
     }
-   
-   
+
 }

@@ -71,6 +71,11 @@ public class MainAdmin extends javax.swing.JFrame {
         jMenu1.add(jMenu5);
 
         jMenuItem6.setText("Productos");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem6);
 
         jMenuItem7.setText("Clientes");
@@ -100,6 +105,13 @@ public class MainAdmin extends javax.swing.JFrame {
         c.setVisible(true);
         c.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // Instancia de JFrame Producto
+        Productor pro = new Productor();
+        pro.setVisible(true);
+        pro.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
