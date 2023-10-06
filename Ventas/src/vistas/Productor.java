@@ -203,8 +203,6 @@ public class Productor extends javax.swing.JFrame {
         if(txtIDProducto.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Debe indicar un ID");
             JOptionPane.showConfirmDialog(null, "Elija una opción", "Titulo",1);
-        }else{
-            
         }
         
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
