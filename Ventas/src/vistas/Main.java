@@ -1,6 +1,12 @@
 package vistas;
 
-import static java.awt.PageAttributes.ColorType.COLOR;
+import acceso.UsuarioDAO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -15,7 +21,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Faver Max");
-//        Titulo.setForeground(COLOR);
+
     }
 
     /**
@@ -49,10 +55,12 @@ public class Main extends javax.swing.JFrame {
         Titulo.setOpaque(false);
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 16)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Presente en cada detalle de tu hogar ");
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 2, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("FRAVEMAX");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -93,6 +101,11 @@ public class Main extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 51, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Entrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout InicioSesionLayout = new javax.swing.GroupLayout(InicioSesion);
         InicioSesion.setLayout(InicioSesionLayout);
@@ -181,6 +194,27 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Botón Ingresar       
+        UsuarioDAO udao = new UsuarioDAO();
+        MainAdmin admin = new MainAdmin();
+        if (validar()) {
+            try {
+                if (udao.ingresoLogin(txtUsuario.getText(), txtPassword.getText()) != null) {
+                    JOptionPane.showMessageDialog(admin, "Sesion Iniciada");
+                admin.setVisible(true);
+                this.dispose();  
+                } else {
+                    JOptionPane.showMessageDialog(admin, "Datos no registrados en la Base de Datos");
+                }  
+            } catch (Exception ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Corrobore los datos ingresados");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +242,12 @@ public class Main extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -217,6 +257,24 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
+    private boolean validar(){
+        String patron = "[0-9!@#$%^&*()_+]";
+        Pattern pattern = Pattern.compile(patron);
+        Matcher matcher = pattern.matcher(txtUsuario.getText());
+        char[] passwordChars = txtPassword.getPassword();
+        if (txtUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe Indicar su Nombre de Usuario");
+        } else if (matcher.find()) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar caracteres válidos");
+        } else if (passwordChars.length == 0 || new String(passwordChars).trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar su Contraseña");
+        } else {
+            return true;
+        }
+        return false;
+    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Base;
     private javax.swing.JPanel InicioSesion;
