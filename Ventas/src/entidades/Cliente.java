@@ -40,7 +40,7 @@ public class Cliente extends Persona {
 
     @Override
     public String toString() {
-        return "Cliente: " + "Id Cliente= " + idCliente +" "+ super.toString();
+        return "ID Cliente= " + idCliente +" "+ super.toString();
     }
 
 }

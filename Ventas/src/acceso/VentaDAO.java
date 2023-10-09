@@ -167,6 +167,43 @@ public class VentaDAO {
 
     }
 
+    public List<Venta> obtenerVentasPorIDProducto(int id) {//VENTAS POR ID PRODUCTO
+
+        Venta venta = null;
+        Cliente cliente = null;
+        Producto producto = null;
+        Date fecha = new Date(0, 0, 0);
+        List<Venta> ventas = new ArrayList<>();
+
+        try {
+            conn = conexion.conexionDB();
+            sql = "SELECT * FROM venta v JOIN producto p ON v.id_producto = p.id_producto WHERE v.id_producto = " + id;
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cliente = new Cliente();
+                producto = new Producto();
+                venta = new Venta(cliente, producto, fecha);
+                venta.setIdVenta(rs.getInt("id_venta"));
+                venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
+                venta.getProducto().setIdProducto(rs.getInt("id_producto"));
+                venta.setFechaVenta(rs.getDate("fechadeVenta"));
+                ventas.add(venta);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar las Ventas por ID Producto");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+        return ventas;
+
+    }
+
     public List<Cliente> obtenerClientesporProducto(int idProducto) {
         Cliente cliente = null;
         List<Cliente> clientes = new ArrayList<>();
@@ -201,7 +238,6 @@ public class VentaDAO {
     }
 
     //--------------------------------------------------------------------------------------------------------------
-    
     public Venta listarVentasID(int id) {
         Venta venta = null;
         Cliente cliente = null;
@@ -210,7 +246,7 @@ public class VentaDAO {
 
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT * FROM venta WHERE id_venta = "+id;
+            sql = "SELECT * FROM venta WHERE id_venta = " + id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
