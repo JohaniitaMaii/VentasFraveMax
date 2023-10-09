@@ -84,6 +84,11 @@ public class Clientes extends javax.swing.JFrame {
                 botonActualizarMouseExited(evt);
             }
         });
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarActionPerformed(evt);
+            }
+        });
 
         botonEliminar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -271,6 +276,10 @@ public class Clientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnLimpiar.setText("");
     }//GEN-LAST:event_btnLimpiarMouseExited
+
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -137,7 +137,12 @@ public class Productor extends javax.swing.JFrame {
         btnListar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnListar.setForeground(new java.awt.Color(255, 255, 255));
         btnListar.setText("Listar");
-        jPanel1.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
 
         btnSalir.setBackground(new java.awt.Color(0, 51, 102));
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -206,6 +211,10 @@ public class Productor extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnListarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -115,15 +115,15 @@ public class Main extends javax.swing.JFrame {
             .addGroup(InicioSesionLayout.createSequentialGroup()
                 .addGroup(InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(InicioSesionLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jButton1))
-                    .addGroup(InicioSesionLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addGroup(InicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(InicioSesionLayout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addComponent(jButton1)))
                 .addGap(0, 71, Short.MAX_VALUE))
         );
         InicioSesionLayout.setVerticalGroup(
@@ -156,7 +156,7 @@ public class Main extends javax.swing.JFrame {
             .addGroup(VerProductosLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel5)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         VerProductosLayout.setVerticalGroup(
             VerProductosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,11 +171,11 @@ public class Main extends javax.swing.JFrame {
         BaseLayout.setHorizontalGroup(
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(InicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(BaseLayout.createSequentialGroup()
-                .addGap(81, 81, 81)
+                .addGap(95, 95, 95)
                 .addComponent(VerProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(InicioSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BaseLayout.setVerticalGroup(
             BaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

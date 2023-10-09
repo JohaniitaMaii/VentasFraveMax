@@ -29,9 +29,10 @@ public class MainAdmin extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,9 +68,6 @@ public class MainAdmin extends javax.swing.JFrame {
         jMenuItem1.setText("Administrador");
         jMenu1.add(jMenuItem1);
 
-        jMenu5.setText("Vendedores");
-        jMenu1.add(jMenu5);
-
         jMenuItem6.setText("Productos");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,6 +84,17 @@ public class MainAdmin extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem7);
 
+        jMenuItem4.setText("Ventas");
+        jMenu1.add(jMenuItem4);
+
+        jMenuItem3.setText("Vendedores");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -95,7 +104,9 @@ public class MainAdmin extends javax.swing.JFrame {
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
         // 
-
+        Ventas ventas = new Ventas();
+        ventas.setVisible(true);
+        
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -113,14 +124,22 @@ public class MainAdmin extends javax.swing.JFrame {
         pro.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        Vendedores vend = new Vendedores();
+        vend.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
