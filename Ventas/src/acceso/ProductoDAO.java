@@ -152,6 +152,36 @@ public class ProductoDAO {
         return pb;
     }
 
+    public Producto buscarPorID(int id) {
+        Producto pb = new Producto();
+
+        try {
+            conn = conexion.conexionDB();
+            sql = "SELECT * FROM producto WHERE id_producto = "+id;
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                pb.setIdProducto(rs.getInt("id_producto"));
+                pb.setNombreProducto(rs.getString("nombreProducto"));
+                pb.setDescripcion(rs.getString("descripcion"));
+                pb.setPrecioActual(rs.getDouble("precioActual"));
+                pb.setStock(rs.getInt("stock"));
+                pb.setEstado(rs.getBoolean("estado"));
+            }
+            System.out.println("Producto en la Base de Datos");
+        } catch (Exception e) {
+            System.out.println("El Producto no se encuentra en el Sistema");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+
+        return pb;
+    }
+
     public List<Producto> listaProductosporID(int id) {//LISTAS DE PRODUCTOS POR CLIENTE
 
         Producto producto = null;
@@ -161,7 +191,7 @@ public class ProductoDAO {
             conn = conexion.conexionDB();
             sql = "SELECT producto.id_producto, producto.nombreProducto, producto.descripcion, "
                     + "producto.precioActual, producto.stock, producto.estado FROM producto "
-                    + "JOIN venta ON producto.id_producto = venta.id_producto WHERE venta.id_cliente = "+id;
+                    + "JOIN venta ON producto.id_producto = venta.id_producto WHERE venta.id_cliente = " + id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
