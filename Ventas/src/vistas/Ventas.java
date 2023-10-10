@@ -57,6 +57,9 @@ public class Ventas extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         comboClientes = new javax.swing.JComboBox<>();
         comboProductos = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtIDVenta1 = new javax.swing.JTextField();
+        btnEliminar2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -71,16 +74,21 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel2.setText("ID Venta:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
+        jLabel2.setText("Cant. Producto:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 102));
         jLabel3.setText("Fecha:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, 20));
 
         txtIDVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(txtIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 200, -1));
+        txtIDVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDVentaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 120, -1));
 
         btnBuscarProducto.setBackground(new java.awt.Color(0, 51, 102));
         btnBuscarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -115,7 +123,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 240, 30));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 170, 30));
 
         btnEliminar1.setBackground(new java.awt.Color(0, 51, 102));
         btnEliminar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -131,24 +139,24 @@ public class Ventas extends javax.swing.JFrame {
                 btnEliminar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 240, 30));
+        jPanel1.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
 
         btnEliminar.setBackground(new java.awt.Color(0, 51, 102));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/update_24.png"))); // NOI18N
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar-producto.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 240, 30));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 180, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Filtar por:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 200, -1));
+        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 200, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 51, 102));
@@ -156,7 +164,7 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
 
         jComboBoxVendedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBoxVendedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 580, -1));
+        jPanel1.add(jComboBoxVendedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 640, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 102));
@@ -164,10 +172,29 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
         comboClientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 580, -1));
+        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 640, -1));
 
         comboProductos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 580, -1));
+        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 640, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel4.setText("ID Venta:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
+
+        txtIDVenta1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel1.add(txtIDVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 120, -1));
+
+        btnEliminar2.setBackground(new java.awt.Color(0, 51, 102));
+        btnEliminar2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEliminar2.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/update_24.png"))); // NOI18N
+        btnEliminar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 170, 30));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -215,7 +242,7 @@ public class Ventas extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,7 +286,7 @@ public class Ventas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,11 +354,20 @@ public class Ventas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalir1ActionPerformed
 
+    private void txtIDVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDVentaActionPerformed
+
+    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProducto;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminar1;
+    private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSalir1;
@@ -344,6 +380,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -352,5 +389,6 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtIDVenta;
+    private javax.swing.JTextField txtIDVenta1;
     // End of variables declaration//GEN-END:variables
 }
