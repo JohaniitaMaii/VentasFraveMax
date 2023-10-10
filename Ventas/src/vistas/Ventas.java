@@ -99,7 +99,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnBuscarProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 50, 30));
+        jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 140, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
@@ -261,23 +261,22 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Administrar Ventas");
+        jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(253, 253, 253))
+            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
+                .addContainerGap()
                 .addComponent(jLabel8)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
