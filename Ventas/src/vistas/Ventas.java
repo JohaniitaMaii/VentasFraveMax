@@ -5,6 +5,12 @@
  */
 package vistas;
 
+import acceso.ClienteDAO;
+import acceso.ProductoDAO;
+import entidades.Cliente;
+import entidades.Producto;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +19,17 @@ import javax.swing.JOptionPane;
  */
 public class Ventas extends javax.swing.JFrame {
 
+    ProductoDAO prodao = new ProductoDAO();
+    ClienteDAO clidao = new ClienteDAO();
+    List<Producto> listaproductos = new ArrayList();
+    List<Cliente> listaClientes = new ArrayList();
+
     /**
      * Creates new form Ventas
      */
     public Ventas() {
         initComponents();
+        cargarCombo();
     }
 
     /**
@@ -40,11 +52,11 @@ public class Ventas extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jComboBoxProductos = new javax.swing.JComboBox<>();
-        jComboBoxClientes = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jComboBoxVendedores = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        comboClientes = new javax.swing.JComboBox<>();
+        comboProductos = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -138,12 +150,6 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 200, -1));
 
-        jComboBoxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBoxProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 580, -1));
-
-        jComboBoxClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBoxClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 580, -1));
-
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 51, 102));
         jLabel10.setText("Vendedores:");
@@ -156,6 +162,12 @@ public class Ventas extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(0, 51, 102));
         jLabel11.setText("Clientes:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
+
+        comboClientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 580, -1));
+
+        comboProductos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 580, -1));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -263,6 +275,19 @@ public class Ventas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void cargarCombo() {
+        listaClientes = clidao.listarClientes();
+        for (Cliente cli : listaClientes) {
+            comboClientes.addItem(cli);
+        }
+        listaproductos = prodao.listarProductos();
+        for (Producto pro : listaproductos) {
+            comboProductos.addItem(pro);
+        }
+
+    }
+
+
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
         // TODO add your handling code here:
         btnLimpiar.setText("Limpiar");
@@ -310,8 +335,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSalir1;
-    private javax.swing.JComboBox<String> jComboBoxClientes;
-    private javax.swing.JComboBox<String> jComboBoxProductos;
+    private javax.swing.JComboBox<Cliente> comboClientes;
+    private javax.swing.JComboBox<Producto> comboProductos;
     private javax.swing.JComboBox<String> jComboBoxVendedores;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
