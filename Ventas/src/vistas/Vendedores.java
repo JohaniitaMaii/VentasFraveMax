@@ -61,6 +61,8 @@ public class Vendedores extends javax.swing.JFrame {
             }
         });
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 

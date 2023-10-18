@@ -338,7 +338,7 @@ public class Productor extends javax.swing.JFrame {
                     if (produ == null) {
                         JOptionPane.showMessageDialog(null, "El Producto no Existe.!!");
                     } else {//Producto existente
-                        if (vedao.obtenerVentasPorIDProducto(produ.getIdProducto()).isEmpty()) {//Verificamos que no haya una venta
+                        if (vedao.obtenerClientesporProducto(produ.getIdProducto()).isEmpty()) {//Verificamos que no haya una venta
                             //Preguntamos si está seguro de realizar la acción
                             int pregunta = JOptionPane.showConfirmDialog(
                                     this, "¿Estas seguro de querer eliminar el producto?",

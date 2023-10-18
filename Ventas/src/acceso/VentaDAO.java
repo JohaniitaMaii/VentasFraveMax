@@ -1,6 +1,7 @@
 package acceso;
 
 import entidades.Cliente;
+import entidades.DetalleVenta;
 import entidades.Producto;
 import entidades.Venta;
 import java.sql.Connection;
@@ -22,16 +23,20 @@ public class VentaDAO {
     private ResultSet rs = null;
     private String sql;
     Conexion conexion = new Conexion();
+    DetalleVentaDAO detadao = new DetalleVentaDAO();
 
-    public void insertarVenta(Venta venta) {
+    public void insertarVenta(Venta venta) {//USADO EN VISTA VENTAVIEW
+        DetalleVenta detaventa = null;
         try {
             conn = conexion.conexionDB();
-            sql = "INSERT INTO venta(id_cliente, id_producto, fechadeVenta) VALUES (?,?,?)";
+            sql = "INSERT INTO venta(id_cliente, fechadeVenta) VALUES (?,?)";
             ps = conn.prepareStatement(sql);
             ps.setInt(1, venta.getCliente().getIdCliente());
-            ps.setInt(2, venta.getProducto().getIdProducto());
-            ps.setDate(3, venta.getFechaVenta());
-            ps.executeUpdate();
+            ps.setDate(2, (Date) venta.getFechaVenta());
+            int r = ps.executeUpdate();
+            if (r == 1) {
+
+            }
             System.out.println("Venta insertada");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al insertar una venta");
@@ -48,7 +53,6 @@ public class VentaDAO {
     public List<Venta> listarVentas() {
         Venta venta = null;
         Cliente cliente = null;
-        Producto producto = null;
         Date fecha = new Date(0, 0, 0);
         List<Venta> ventas = new ArrayList<>();
 
@@ -60,11 +64,9 @@ public class VentaDAO {
 
             while (rs.next()) {
                 cliente = new Cliente();
-                producto = new Producto();
-                venta = new Venta(cliente, producto, fecha);
+                venta = new Venta(cliente, fecha);
                 venta.setIdVenta(rs.getInt("id_venta"));
                 venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
-                venta.getProducto().setIdProducto(rs.getInt("id_producto"));
                 venta.setFechaVenta(rs.getDate("fechadeVenta"));
                 ventas.add(venta);
             }
@@ -80,7 +82,7 @@ public class VentaDAO {
         return ventas;
     }
 
-    public void modificarVenta(Venta venta) {//SE MODIFICA EL DATE
+    public void modificarVenta(Venta venta) {
 
         if (venta == null) {
             JOptionPane.showMessageDialog(null, "Debe indicar una venta");
@@ -88,13 +90,12 @@ public class VentaDAO {
 
             try {
                 conn = conexion.conexionDB();
-                sql = "UPDATE venta SET id_cliente = ?,  id_producto = ?, "
+                sql = "UPDATE venta SET id_cliente = ?, "
                         + "fechadeVenta = ? WHERE id_venta = ?";
                 ps = conn.prepareStatement(sql);
                 ps.setInt(1, venta.getCliente().getIdCliente());
-                ps.setInt(2, venta.getProducto().getIdProducto());
-                ps.setDate(3, venta.getFechaVenta());
-                ps.setInt(4, venta.getIdVenta());
+                ps.setDate(2, (Date) venta.getFechaVenta());
+                ps.setInt(3, venta.getIdVenta());
                 ps.executeUpdate();
                 System.out.println("Venta modificada");
             } catch (SQLException ex) {
@@ -111,6 +112,7 @@ public class VentaDAO {
     }
 
     public void eliminarVenta(Venta venta) {
+        detadao.eliminarDetalleVenta(venta.getIdVenta());
 
         try {
             conn = conexion.conexionDB();
@@ -118,6 +120,7 @@ public class VentaDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, venta.getIdVenta());
             ps.executeUpdate();
+            System.out.println("Venta eliminada");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar la Venta");
         } finally {
@@ -130,11 +133,10 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> obtenerVentasPorID(int id) {//VENTAS POR ID CLIENTE
+    public List<Venta> obtenerVentasPorIDCliente(int id) {  //(IMPORTANTE)
 
         Venta venta = null;
         Cliente cliente = null;
-        Producto producto = null;
         Date fecha = new Date(0, 0, 0);
         List<Venta> ventas = new ArrayList<>();
 
@@ -146,11 +148,9 @@ public class VentaDAO {
 
             while (rs.next()) {
                 cliente = new Cliente();
-                producto = new Producto();
-                venta = new Venta(cliente, producto, fecha);
+                venta = new Venta(cliente, fecha);
                 venta.setIdVenta(rs.getInt("id_venta"));
                 venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
-                venta.getProducto().setIdProducto(rs.getInt("id_producto"));
                 venta.setFechaVenta(rs.getDate("fechadeVenta"));
                 ventas.add(venta);
             }
@@ -167,32 +167,32 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> obtenerVentasPorIDProducto(int id) {//VENTAS POR ID PRODUCTO
+    public List<Venta> obtenerVentasPorFecha(java.util.Date fecha) {  //(IMPORTANTE)
 
         Venta venta = null;
         Cliente cliente = null;
-        Producto producto = null;
-        Date fecha = new Date(0, 0, 0);
+        Date fe = new Date(0, 0, 0);
         List<Venta> ventas = new ArrayList<>();
 
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT * FROM venta v JOIN producto p ON v.id_producto = p.id_producto WHERE v.id_producto = " + id;
+            sql = "SELECT * "
+                    + "FROM venta "
+                    + "WHERE DATE(fechadeVenta) = ?";
             ps = conn.prepareStatement(sql);
+            ps.setDate(1, new java.sql.Date(fecha.getTime()));
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 cliente = new Cliente();
-                producto = new Producto();
-                venta = new Venta(cliente, producto, fecha);
+                venta = new Venta(cliente, fe);
                 venta.setIdVenta(rs.getInt("id_venta"));
                 venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
-                venta.getProducto().setIdProducto(rs.getInt("id_producto"));
                 venta.setFechaVenta(rs.getDate("fechadeVenta"));
                 ventas.add(venta);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al listar las Ventas por ID Producto");
+            JOptionPane.showMessageDialog(null, "Error al listar las Ventas por Fecha");
         } finally {
             try {
                 conexion.desconectar();
@@ -204,15 +204,17 @@ public class VentaDAO {
 
     }
 
-    public List<Cliente> obtenerClientesporProducto(int idProducto) {
+    public List<Cliente> obtenerClientesporProducto(int idProducto) {//(IMPORTANTE)
         Cliente cliente = null;
         List<Cliente> clientes = new ArrayList<>();
 
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT cliente.id_cliente, cliente.apellido, cliente.nombre, cliente.domicilio, cliente.telefono "
-                    + "FROM cliente JOIN venta ON cliente.id_cliente = venta.id_cliente "
-                    + "Where venta.id_producto = " + idProducto;
+            sql = "SELECT DISTINCT c.id_cliente, c.apellido, c.nombre, c.domicilio, c.telefono "
+                    + "FROM cliente c "
+                    + "INNER JOIN venta v ON c.id_cliente = v.id_cliente "
+                    + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta "
+                    + "WHERE dv.id_producto = " + idProducto;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -237,30 +239,27 @@ public class VentaDAO {
         return clientes;
     }
 
-    //--------------------------------------------------------------------------------------------------------------
-    public Venta listarVentasID(int id) {
+    //------------------------------------------------------------------------------
+    public Venta traerVenta(Venta ve) {//Método para la Vista VentaView---------------------------------------------------
         Venta venta = null;
         Cliente cliente = null;
-        Producto producto = null;
-        Date fecha = new Date(0, 0, 0);
-
+        Date fecha2 = new Date(0, 0, 0);
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT * FROM venta WHERE id_venta = " + id;
+            sql = "SELECT * FROM venta WHERE id_cliente = " + ve.getCliente().getIdCliente();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 cliente = new Cliente();
-                producto = new Producto();
-                venta = new Venta(cliente, producto, fecha);
+                venta = new Venta(cliente, fecha2);
                 venta.setIdVenta(rs.getInt("id_venta"));
                 venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
-                venta.getProducto().setIdProducto(rs.getInt("id_producto"));
                 venta.setFechaVenta(rs.getDate("fechadeVenta"));
+                System.out.println("venta aqui");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al listar las Ventas");
+            JOptionPane.showMessageDialog(null, "Error al traer la Venta");
         } finally {
             try {
                 conexion.desconectar();

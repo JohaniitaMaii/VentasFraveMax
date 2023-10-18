@@ -13,7 +13,7 @@ public class ProductoDAO {
     private String sql;
     Conexion conexion = new Conexion();
 
-    public void insertarProductos(Producto producto) {
+    public void insertarProductos(Producto producto) {//usado
 
         try {
             conn = conexion.conexionDB();
@@ -38,7 +38,7 @@ public class ProductoDAO {
 
     }
 
-    public List<Producto> listarProductos() {
+    public List<Producto> listarProductos() {//usado
         Producto producto = null;
         List<Producto> productos = new ArrayList<>();
 
@@ -70,7 +70,7 @@ public class ProductoDAO {
         return productos;
     }
 
-    public void modificarProducto(Producto producto) {
+    public void modificarProducto(Producto producto) {//usado
         if (producto == null) {
             JOptionPane.showMessageDialog(null, "Debe indicar el producto");
         }
@@ -100,7 +100,7 @@ public class ProductoDAO {
 
     }
 
-    public void eliminarProducto(Producto producto) {
+    public void eliminarProducto(Producto producto) {//usado
 
         try {
             conn = conexion.conexionDB();
@@ -152,7 +152,7 @@ public class ProductoDAO {
         return pb;
     }
 
-    public Producto buscarPorID(int id) {
+    public Producto buscarPorID(int id) {//usado
         Producto pb = new Producto();
 
         try {
@@ -182,16 +182,19 @@ public class ProductoDAO {
         return pb;
     }
 
-    public List<Producto> listaProductosporID(int id) {//LISTAS DE PRODUCTOS POR CLIENTE
+    public List<Producto> listaProductosporID(int id) {//LISTAS DE PRODUCTOS POR CLIENTE   //ARREGLADO 
 
         Producto producto = null;
         List<Producto> productos = new ArrayList();
 
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT producto.id_producto, producto.nombreProducto, producto.descripcion, "
-                    + "producto.precioActual, producto.stock, producto.estado FROM producto "
-                    + "JOIN venta ON producto.id_producto = venta.id_producto WHERE venta.id_cliente = " + id;
+            sql = "SELECT p.id_producto, p.nombreProducto, p.descripcion, "
+                    + "p.precioActual, p.stock, p.estado FROM cliente c "
+                    + "INNER JOIN venta v ON c.id_cliente = v.id_cliente "
+                    + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta "
+                    + "INNER JOIN producto p ON dv.id_producto = p.id_producto "
+                    + "WHERE c.id_cliente = " + id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -208,6 +211,45 @@ public class ProductoDAO {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al Listar productos por id cliente");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+        return productos;
+    }
+    
+    public List<Producto> listaProductosporFecha(java.util.Date fecha) {//LISTA DE PRODUCTOS POR FECHA (IMPORTANTE)
+
+        Producto producto = null;
+        List<Producto> productos = new ArrayList();
+
+        try {
+            conn = conexion.conexionDB();
+            sql = "SELECT p.id_producto, p.nombreProducto, p.descripcion, p.precioActual, p.stock, p.estado "
+                    + "FROM venta v "
+                    + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta "
+                    + "INNER JOIN producto p ON dv.id_producto = p.id_producto " 
+                    + "WHERE DATE(v.fechadeVenta) = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setDate(1, new java.sql.Date(fecha.getTime()));
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                producto = new Producto();
+                producto.setIdProducto(rs.getInt("id_producto"));
+                producto.setNombreProducto(rs.getString("nombreProducto"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setPrecioActual(rs.getDouble("precioActual"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setEstado(rs.getBoolean("estado"));
+                productos.add(producto);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Listar productos por fecha");
         } finally {
             try {
                 conexion.desconectar();

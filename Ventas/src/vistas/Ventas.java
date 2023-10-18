@@ -49,11 +49,8 @@ public class Ventas extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JButton();
         btnEliminar1 = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBoxVendedores = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         comboClientes = new javax.swing.JComboBox<>();
         comboProductos = new javax.swing.JComboBox<>();
@@ -68,6 +65,8 @@ public class Ventas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,12 +74,12 @@ public class Ventas extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 51, 102));
         jLabel2.setText("Cant. Producto:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, 20));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 102));
         jLabel3.setText("Fecha:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, -1, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 20));
 
         txtIDVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtIDVenta.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +87,7 @@ public class Ventas extends javax.swing.JFrame {
                 txtIDVentaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 120, -1));
+        jPanel1.add(txtIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 120, -1));
 
         btnBuscarProducto.setBackground(new java.awt.Color(0, 51, 102));
         btnBuscarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -99,12 +98,12 @@ public class Ventas extends javax.swing.JFrame {
                 btnBuscarProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 140, 30));
+        jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 140, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
         jLabel5.setText("Productos:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, 20));
 
         btnLimpiar.setBackground(new java.awt.Color(0, 51, 102));
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -123,7 +122,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 170, 30));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 170, 30));
 
         btnEliminar1.setBackground(new java.awt.Color(0, 51, 102));
         btnEliminar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -139,43 +138,24 @@ public class Ventas extends javax.swing.JFrame {
                 btnEliminar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
-
-        btnEliminar.setBackground(new java.awt.Color(0, 51, 102));
-        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/agregar-producto.png"))); // NOI18N
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 180, 180, 30));
+        jPanel1.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 150, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Filtar por:");
+        jLabel1.setText("Filtrar por:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
         jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 200, -1));
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel10.setText("Vendedores:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, 20));
-
-        jComboBoxVendedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBoxVendedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 640, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 102));
         jLabel11.setText("Clientes:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         comboClientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 640, -1));
+        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 640, -1));
 
         comboProductos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 640, -1));
+        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 640, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 102));
@@ -194,7 +174,7 @@ public class Ventas extends javax.swing.JFrame {
                 btnEliminar2ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 170, 30));
+        jPanel1.add(btnEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 170, 30));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -203,7 +183,7 @@ public class Ventas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id Venta", "Vendedor", "Producto", "Cantidad", "Precio Final", "Fecha"
+                "Id Venta", "Fecha", "Producto", "Cantidad", "Precio Final"
             }
         ));
         jTable1.setToolTipText("");
@@ -292,7 +272,7 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -323,10 +303,6 @@ public class Ventas extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnLimpiar.setText("");
     }//GEN-LAST:event_btnLimpiarMouseExited
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // BOTON SALIR
@@ -364,7 +340,6 @@ public class Ventas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProducto;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnEliminar2;
     private javax.swing.JButton btnLimpiar;
@@ -372,10 +347,8 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir1;
     private javax.swing.JComboBox<Cliente> comboClientes;
     private javax.swing.JComboBox<Producto> comboProductos;
-    private javax.swing.JComboBox<String> jComboBoxVendedores;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

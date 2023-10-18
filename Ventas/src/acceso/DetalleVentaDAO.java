@@ -20,6 +20,32 @@ public class DetalleVentaDAO {
     private String sql;
     Conexion conexion = new Conexion();
 
+    public void insertarDetalle(DetalleVenta detalle){//USADO EN VISTA VEMTAVIEW---------
+        
+        try {
+            conn = conexion.conexionDB();
+            sql = "INSERT INTO detalleventa(id_venta, id_producto, cantidad, precioTotalVentas) VALUES (?,?,?,?)";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, detalle.getVenta().getIdVenta());
+            ps.setInt(2, detalle.getProducto().getIdProducto());
+            ps.setInt(3, detalle.getCantidad());
+            ps.setDouble(4, detalle.getPrecioTotal());
+            ps.executeUpdate();
+            System.out.println("Detalle insertado");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al insertar un detalle de Venta");
+        }finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+    }
+    
+    
+
     public List<DetalleVenta> listarDetalleVentas() {
         Cliente cliente = null;
         Producto producto = null;
@@ -36,15 +62,15 @@ public class DetalleVentaDAO {
             while (rs.next()) {
                 cliente = new Cliente();
                 producto = new Producto();
-                venta = new Venta(cliente,producto);
-                detalleVenta = new DetalleVenta(venta);
+                venta = new Venta(cliente);
+                detalleVenta = new DetalleVenta(venta,producto);
                 detalleVenta.setIdDetalle(rs.getInt("id_detalleVenta"));
                 detalleVenta.getVenta().setIdVenta(rs.getInt("id_venta"));
+                detalleVenta.getProducto().setIdProducto(rs.getInt("id_producto"));
                 detalleVenta.setCantidad(rs.getInt("cantidad"));
                 detalleVenta.setPrecioTotal(rs.getDouble("precioTotalVentas"));
                 detalles.add(detalleVenta);
             }
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al listar los detalles de ventas");
         } finally {
@@ -54,8 +80,27 @@ public class DetalleVentaDAO {
                 System.out.println("Error al desconectar");
             }
         }
-
         return detalles;
+    }
+    
+    public void eliminarDetalleVenta(int id){//USAR EN VENTADAO -- ELIMINAR VENTA
+        
+        try {
+            conn = conexion.conexionDB();
+            sql = "DELETE FROM detalleventa WHERE id_venta = ?";
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            System.out.println("Detalles eliminados");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar los DetalleVenta");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
     }
     
     

@@ -55,7 +55,7 @@ public class VentasMain {
         //--------------------------------------------------------------------------------------
         VentaDAO vedao = new VentaDAO();
 
-        Venta venta = new Venta(cliente, producto, Date.valueOf("2023-08-12"));
+        Venta venta = new Venta(cliente,  Date.valueOf("2023-08-12"));
 
 //        vedao.insertarVenta(venta);//--------------INSERTAR UNA VENTA
 //        vedao.modificarVenta(venta);//--------------MODIFICAR UNA VENTA

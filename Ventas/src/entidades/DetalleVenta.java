@@ -7,21 +7,27 @@ package entidades;
 public class DetalleVenta {
 
     private int idDetalle;
-    private int cantidad;
     private Venta venta;
+    private Producto producto;
+    private int cantidad;
     private double precioTotal;
 
     public DetalleVenta() {
     }
 
-    public DetalleVenta(Venta venta) {
-        this.venta = venta;
+    public DetalleVenta(int idDetalle) {
+        this.idDetalle = idDetalle;
     }
 
-    public DetalleVenta(int idDetalle, int cantidad, Venta venta, double precioTotal) {
-        this.idDetalle = idDetalle;
-        this.cantidad = cantidad;
+    public DetalleVenta(Venta venta, Producto producto) {
         this.venta = venta;
+        this.producto = producto;
+    }
+
+    public DetalleVenta(Venta venta, Producto producto, int cantidad, double precioTotal) {
+        this.venta = venta;
+        this.producto = producto;
+        this.cantidad = cantidad;
         this.precioTotal = precioTotal;
     }
 
@@ -33,20 +39,28 @@ public class DetalleVenta {
         this.idDetalle = idDetalle;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public Venta getVenta() {
         return venta;
     }
 
     public void setVenta(Venta venta) {
         this.venta = venta;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public double getPrecioTotal() {
@@ -59,7 +73,9 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return "Detalle Venta: " + "ID Detalle: " + idDetalle + ", Venta: " + venta.getIdVenta() + ", Cantidad: " + cantidad + ", Precio Total: " + precioTotal;
+        return "DetalleVenta{" + "idDetalle=" + idDetalle + ", venta=" + venta.getIdVenta() + ", producto=" + producto.getIdProducto() + ", cantidad=" + cantidad + ", precioTotal=" + precioTotal + '}';
     }
+
+    
 
 }
