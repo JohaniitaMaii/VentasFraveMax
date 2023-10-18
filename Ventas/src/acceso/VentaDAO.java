@@ -50,7 +50,7 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> listarVentas() {
+    public List<Venta> listarVentas() {//augusto
         Venta venta = null;
         Cliente cliente = null;
         Date fecha = new Date(0, 0, 0);
@@ -82,7 +82,7 @@ public class VentaDAO {
         return ventas;
     }
 
-    public void modificarVenta(Venta venta) {
+    public void modificarVenta(Venta venta) {//augusto
 
         if (venta == null) {
             JOptionPane.showMessageDialog(null, "Debe indicar una venta");
@@ -111,7 +111,7 @@ public class VentaDAO {
 
     }
 
-    public void eliminarVenta(Venta venta) {
+    public void eliminarVenta(Venta venta) {//augusto
         detadao.eliminarDetalleVenta(venta.getIdVenta());
 
         try {
@@ -133,7 +133,7 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> obtenerVentasPorIDCliente(int id) {  //(IMPORTANTE)
+    public List<Venta> obtenerVentasPorIDCliente(int id) {  //(IMPORTANTE)(3)--//augusto
 
         Venta venta = null;
         Cliente cliente = null;
@@ -167,7 +167,7 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> obtenerVentasPorFecha(java.util.Date fecha) {  //(IMPORTANTE)
+    public List<Venta> obtenerVentasPorFecha(java.util.Date fecha) {  //(IMPORTANTE)(2)--//augusto
 
         Venta venta = null;
         Cliente cliente = null;
@@ -204,7 +204,7 @@ public class VentaDAO {
 
     }
 
-    public List<Cliente> obtenerClientesporProducto(int idProducto) {//(IMPORTANTE)
+    public List<Cliente> obtenerClientesporProducto(int idProducto) {//(IMPORTANTE)----(4)..//Johana
         Cliente cliente = null;
         List<Cliente> clientes = new ArrayList<>();
 
@@ -240,7 +240,7 @@ public class VentaDAO {
     }
 
     //------------------------------------------------------------------------------
-    public Venta traerVenta(Venta ve) {//Método para la Vista VentaView---------------------------------------------------
+    public Venta traerVenta(Venta ve) {//Método para la Vista VentaView-----(No necesario)---------------------------
         Venta venta = null;
         Cliente cliente = null;
         Date fecha2 = new Date(0, 0, 0);

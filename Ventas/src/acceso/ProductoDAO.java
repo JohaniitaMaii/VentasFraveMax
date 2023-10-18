@@ -221,7 +221,7 @@ public class ProductoDAO {
         return productos;
     }
     
-    public List<Producto> listaProductosporFecha(java.util.Date fecha) {//LISTA DE PRODUCTOS POR FECHA (IMPORTANTE)
+    public List<Producto> listaProductosporFecha(java.util.Date fecha) {//LISTA DE PRODUCTOS POR FECHA (IMPORTANTE)(1)--JOHNNY
 
         Producto producto = null;
         List<Producto> productos = new ArrayList();

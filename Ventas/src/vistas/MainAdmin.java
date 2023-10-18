@@ -40,7 +40,7 @@ public class MainAdmin extends javax.swing.JFrame {
 
         desktopPane.setBackground(new java.awt.Color(30, 30, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Diseño sin título.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/grande.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         desktopPane.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -49,9 +49,7 @@ public class MainAdmin extends javax.swing.JFrame {
         desktopPane.setLayout(desktopPaneLayout);
         desktopPaneLayout.setHorizontalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(desktopPaneLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -59,6 +57,10 @@ public class MainAdmin extends javax.swing.JFrame {
         );
 
         getContentPane().add(desktopPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 520));
+
+        jMenuBar1.setBackground(new java.awt.Color(0, 51, 102));
+        jMenuBar1.setForeground(new java.awt.Color(0, 51, 102));
+        jMenuBar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jMenu1.setText("Administracion");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
