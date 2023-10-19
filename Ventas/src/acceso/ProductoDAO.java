@@ -190,7 +190,7 @@ public class ProductoDAO {
         try {
             conn = conexion.conexionDB();
             sql = "SELECT p.id_producto, p.nombreProducto, p.descripcion, "
-                    + "p.precioActual, p.stock, p.estado FROM cliente c "
+                    + "p.precioActual,  dv.cantidad  FROM cliente c "
                     + "INNER JOIN venta v ON c.id_cliente = v.id_cliente "
                     + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta "
                     + "INNER JOIN producto p ON dv.id_producto = p.id_producto "
@@ -204,8 +204,8 @@ public class ProductoDAO {
                 producto.setNombreProducto(rs.getString("nombreProducto"));
                 producto.setDescripcion(rs.getString("descripcion"));
                 producto.setPrecioActual(rs.getDouble("precioActual"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setEstado(rs.getBoolean("estado"));
+                int cantidad = rs.getInt("cantidad");
+                producto.setStock(cantidad);
                 productos.add(producto);
             }
 
@@ -221,14 +221,14 @@ public class ProductoDAO {
         return productos;
     }
     
-    public List<Producto> listaProductosporFecha(java.util.Date fecha) {//LISTA DE PRODUCTOS POR FECHA (IMPORTANTE)(1)--JOHNNY
+    public List<Producto> listaProductosporFecha(java.util.Date fecha) {//LISTA DE PRODUCTOS POR FECHA (IMPORTANTE)(1)--LISTO
 
         Producto producto = null;
         List<Producto> productos = new ArrayList();
 
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT p.id_producto, p.nombreProducto, p.descripcion, p.precioActual, p.stock, p.estado "
+            sql = "SELECT p.id_producto, p.nombreProducto, p.descripcion, p.precioActual, dv.cantidad "
                     + "FROM venta v "
                     + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta "
                     + "INNER JOIN producto p ON dv.id_producto = p.id_producto " 
@@ -243,8 +243,8 @@ public class ProductoDAO {
                 producto.setNombreProducto(rs.getString("nombreProducto"));
                 producto.setDescripcion(rs.getString("descripcion"));
                 producto.setPrecioActual(rs.getDouble("precioActual"));
-                producto.setStock(rs.getInt("stock"));
-                producto.setEstado(rs.getBoolean("estado"));
+                int cantidad = rs.getInt("cantidad");
+                producto.setStock(cantidad);
                 productos.add(producto);
             }
 

@@ -133,7 +133,7 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> obtenerVentasPorIDCliente(int id) {  //(IMPORTANTE)(3)--//augusto
+    public List<Venta> obtenerVentasPorIDCliente(int id) {  //(IMPORTANTE)(3)--//LISTO
 
         Venta venta = null;
         Cliente cliente = null;
@@ -167,7 +167,7 @@ public class VentaDAO {
 
     }
 
-    public List<Venta> obtenerVentasPorFecha(java.util.Date fecha) {  //(IMPORTANTE)(2)--//augusto
+    public List<Venta> obtenerVentasPorFecha(java.util.Date fecha) {  //(IMPORTANTE)(2)--//LISTO
 
         Venta venta = null;
         Cliente cliente = null;
