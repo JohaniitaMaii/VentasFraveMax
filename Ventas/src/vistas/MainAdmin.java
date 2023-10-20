@@ -93,11 +93,6 @@ public class MainAdmin extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
 
         jMenuItem7.setText("Clientes");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
         jMenu1.add(jMenuItem7);
 
         jMenuItem2.setText("Administración Ventas");
@@ -183,14 +178,6 @@ public class MainAdmin extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-
-        Clientes c = new Clientes();
-        c.setVisible(true);
-        c.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // Instancia de JFrame Producto

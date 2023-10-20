@@ -6,6 +6,7 @@ package entidades;
  */
 public class Persona {
 
+     private int id;
     private String apellido;
     private String nombre;
     private String domicilio;
@@ -19,6 +20,34 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public Persona(int id, String apellido, String nombre, String domicilio, String telefono) {
+        this.id = id;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+    }
+
+    
+    
+    public Persona(int id, String apellido, String nombre, String domicilio, String telefono, Persona clase) {
+        this.id = id;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.clase = clase;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
     public Persona(String apellido, String nombre, String domicilio, String telefono) {
         this.apellido = apellido;
         this.nombre = nombre;
@@ -76,7 +105,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Nombre= " + nombre + ", Apellido= " + apellido + ", Domicilio= " + domicilio + ", Telefono= " + telefono;
+        return "ID= " + id + "Nombre= " + nombre + ",  Apellido= " + apellido + ",  Domicilio= " + domicilio + ",  Telefono= " + telefono ;
     }
 
 }
