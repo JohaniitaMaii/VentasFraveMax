@@ -22,9 +22,10 @@ import javax.swing.table.DefaultTableModel;
 public class Clientes extends javax.swing.JFrame {
   private  DefaultTableModel modeloCompra = new DefaultTableModel();
 private DefaultTableModel modelo = new DefaultTableModel();
-ImageIcon icono = new ImageIcon("C:\\Users\\johan\\Documents\\GitHub\\Mis Versiones\\Ventas\\src\\iconos\\client.png");
+ImageIcon icono = new ImageIcon("/iconos/client.png");
 ClienteDAO cdao = new ClienteDAO();
 VentaDAO vdao = new VentaDAO();
+DetalleVentaDAO dedao = new DetalleVentaDAO();
 
     /**
      * Creates new form Clientes
@@ -403,10 +404,10 @@ VentaDAO vdao = new VentaDAO();
                 c.setId(id);
             }
             
-            List<Venta> lista = vdao.buscarVentaCliente(c.getId());
+            List<DetalleVenta> lista = dedao.buscarVentaCliente(c.getId());
             if (lista.size() > 0) {
-                for (Venta v : lista) {
-                    modeloCompra.addRow(new Object[]{v.getProducto().getNombreProducto(), v.getProducto().getPrecioActual(), v.getCantidad(), v.getFechaVenta()});
+                for (DetalleVenta dv : lista) {
+                    modeloCompra.addRow(new Object[]{dv.getProducto().getNombreProducto(), dv.getProducto().getPrecioActual(), dv.getCantidad(), dv.getVenta().getFechaVenta()});
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "El cliente seleccionado no posee compras registradas");
@@ -542,7 +543,7 @@ VentaDAO vdao = new VentaDAO();
                 int id = cdao.obtenerID(c.getNombre(), c.getApellido(), c.getDomicilio(), c.getTelefono());
                 c.setId(id);
             }
-            int confirm = JOptionPane.showConfirmDialog(this, c.toStringCliente(), "Está seguro que desea eliminar el Cliente?", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, "c.toStringCliente()", "Está seguro que desea eliminar el Cliente?", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 if (cdao.eliminar(c)) {
                     JOptionPane.showMessageDialog(this, "Cliente Eliminado de la Base de Datos", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -588,7 +589,7 @@ VentaDAO vdao = new VentaDAO();
                 int id = cdao.obtenerID(c.getNombre(), c.getApellido(), c.getDomicilio(), c.getTelefono());
                 c.setId(id);
             }
-            int confirm = JOptionPane.showConfirmDialog(this, c.toStringCliente(), "Está seguro que desea modificar los datos?", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, "c.toStringCliente()", "Está seguro que desea modificar los datos?", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 cdao.actualizar(c);
                 JOptionPane.showMessageDialog(this, "Cliente Actualizado en la Base de Datos", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -621,8 +622,8 @@ VentaDAO vdao = new VentaDAO();
         // BOTON AGREGAR CLIENTE
         Persona c = crearCliente();
         if (c != null) {
-            c.setCategoria(Personas.CLIENTE);
-            c.setContraseña("");
+//            c.setCategoria(Personas.CLIENTE);
+//            c.setContraseña("");
             try {
                 if ( cdao.nuevoCliente(c)) {
                     JOptionPane.showMessageDialog(this, "El cliente se ha registrado en la Base de Datos");
