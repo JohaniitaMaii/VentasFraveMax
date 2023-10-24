@@ -107,5 +107,10 @@ public class Persona {
     public String toString() {
         return "ID= " + id + "Nombre= " + nombre + ",  Apellido= " + apellido + ",  Domicilio= " + domicilio + ",  Telefono= " + telefono ;
     }
+    public String toStringCliente() {
+        return "--- Cliente --- \n" + 
+                "- Nombre: " + nombre + "\n" + "- Apellido: " + apellido + "\n" + "- Domicilio: " +
+                domicilio + "\n"  + "- Telefono: " + telefono + "\n" ;
+    } 
 
 }
