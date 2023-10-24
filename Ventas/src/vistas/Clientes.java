@@ -2,7 +2,6 @@ package vistas;
 
 import acceso.*;
 import entidades.*;
-import enums.Personas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -20,11 +19,10 @@ import javax.swing.table.DefaultTableModel;
  * @author johan
  */
 public class Clientes extends javax.swing.JFrame {
-  private  DefaultTableModel modeloCompra = new DefaultTableModel();
+private  DefaultTableModel modeloCompra = new DefaultTableModel();
 private DefaultTableModel modelo = new DefaultTableModel();
-ImageIcon icono = new ImageIcon("C:\\Users\\johan\\Documents\\GitHub\\Mis Versiones\\Ventas\\src\\iconos\\client.png");
+ImageIcon icono = new ImageIcon("C:\\Users\\johan\\Documents\\GitHub\\VentasFraveMax\\Ventas\\src\\iconos\\client.png");
 ClienteDAO cdao = new ClienteDAO();
-VentaDAO vdao = new VentaDAO();
 DetalleVentaDAO dedao = new DetalleVentaDAO();
 
     /**
@@ -245,6 +243,11 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         comboCliente.setSelectedIndex(-1);
         comboCliente.setBorder(null);
         comboCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        comboCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                comboClienteMouseClicked(evt);
+            }
+        });
         comboCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboClienteActionPerformed(evt);
@@ -398,7 +401,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
             if (comboCliente.getSelectedIndex() >= 0 ) {
                 c = (Persona) comboCliente.getSelectedItem();
                 int id = cdao.obtenerID(c.getNombre(), c.getApellido(), c.getDomicilio(), c.getTelefono());
-//                c = crearCliente();
+                c = crearCliente();
                 c.setId(id);
             } else if (tablaClientes.getSelectedRow() >= 0) {
                 c = crearCliente();
@@ -659,6 +662,15 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_botonListarActionPerformed
+
+    private void comboClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_comboClienteMouseClicked
+        // TODO add your handling code here:
+        if (comboCliente.getSelectedIndex() == -1) {
+            
+        } else {
+            limpiarDatos();
+        }
+    }//GEN-LAST:event_comboClienteMouseClicked
  
     public void inicializarTabla() {
         modelo.addColumn("Apellido");
@@ -688,12 +700,12 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
     }
      
     private boolean validarDomicilio(String variable) {
-        String patron = ".*[^a-zA-Z0-9ÑÁÉÍÓÚüÜ\\s].*";
-        Pattern pattern = Pattern.compile(patron);
+        String patron = ".*[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚüÜ\\s].*";
+        Pattern pattern = Pattern.compile(patron, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(variable);
         if (variable.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this,"Debe ingresar los datos");
-        } else if (matcher.matches()) {
+        } else if (matcher.find()) {
             JOptionPane.showMessageDialog(this, "Caracter ingresado no válido");
         } else {
             return true;
