@@ -2,6 +2,7 @@ package vistas;
 
 import acceso.*;
 import entidades.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -455,7 +456,9 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
-        if ((c<'a' || c>'z') && (c<'A' || c>'Z')) evt.consume();
+        if (!Character.isLetter(c) && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -640,7 +643,9 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
         char c = evt.getKeyChar();
-        if ((c<'a' || c>'z') && (c<'A' || c>'Z')) evt.consume();
+        if (!Character.isLetter(c) && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void botonListarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListarMouseEntered
