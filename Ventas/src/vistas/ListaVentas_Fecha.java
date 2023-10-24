@@ -2,7 +2,7 @@ package vistas;
 
 import acceso.ClienteDAO;
 import acceso.VentaDAO;
-import entidades.Venta;
+import entidades.*;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,6 +15,7 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
     private DefaultTableModel modelo = new DefaultTableModel();
     List<Venta> ventas = new ArrayList<>();
     VentaDAO vedao = new VentaDAO();
+    ClienteDAO clidao = new ClienteDAO();
     
     /**
      * Creates new form ListaVentas_Fecha
@@ -78,6 +79,7 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Fecha:");
 
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -156,8 +158,9 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
             try {
                 ventas = vedao.obtenerVentasPorFecha(dateChosser.getDate());
                 
-                for (Venta v : ventas) {//Agregar el cliente y sacarle nombre y apellido.. 
-                    modelo.addRow(new Object[]{v.getIdVenta(),v.getCliente().getNombre(),v.getFechaVenta()});
+                for (Venta v : ventas) {
+                    Persona p = clidao.buscarId(v.getCliente().getIdCliente());
+                    modelo.addRow(new Object[]{v.getIdVenta(),p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
             }
         } catch (Exception e) {
             System.out.println("Error al ejecutar el DateChosser");

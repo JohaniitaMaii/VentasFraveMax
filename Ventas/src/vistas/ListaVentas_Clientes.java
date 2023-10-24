@@ -3,6 +3,7 @@ package vistas;
 import acceso.ClienteDAO;
 import acceso.VentaDAO;
 import entidades.Cliente;
+import entidades.Persona;
 import entidades.Venta;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
@@ -152,7 +153,8 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
         Cliente cliente = (Cliente) box.getSelectedItem();
         ventas = vedao.obtenerVentasPorIDCliente(cliente.getIdCliente());
         for (Venta v : ventas) {
-            modelo.addRow(new Object[]{v.getIdVenta(), v.getCliente().getIdCliente(), v.getFechaVenta()});
+            Persona p = clidao.buscarId(v.getCliente().getIdCliente());
+                    modelo.addRow(new Object[]{v.getIdVenta(),p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
         }
     }//GEN-LAST:event_boxActionPerformed
 

@@ -392,12 +392,13 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
     private void btnVerComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerComprasActionPerformed
         // BOTON VER COMPRAS DE CLIENTE
+        modeloCompra.setRowCount(0);
         Persona c = null;
         try {
             if (comboCliente.getSelectedIndex() >= 0 ) {
                 c = (Persona) comboCliente.getSelectedItem();
                 int id = cdao.obtenerID(c.getNombre(), c.getApellido(), c.getDomicilio(), c.getTelefono());
-                c = crearCliente();
+//                c = crearCliente();
                 c.setId(id);
             } else if (tablaClientes.getSelectedRow() >= 0) {
                 c = crearCliente();
