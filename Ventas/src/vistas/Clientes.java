@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class Clientes extends javax.swing.JFrame {
   private  DefaultTableModel modeloCompra = new DefaultTableModel();
 private DefaultTableModel modelo = new DefaultTableModel();
-ImageIcon icono = new ImageIcon("/iconos/client.png");
+ImageIcon icono = new ImageIcon("C:\\Users\\johan\\Documents\\GitHub\\Mis Versiones\\Ventas\\src\\iconos\\client.png");
 ClienteDAO cdao = new ClienteDAO();
 VentaDAO vdao = new VentaDAO();
 DetalleVentaDAO dedao = new DetalleVentaDAO();
@@ -63,12 +63,12 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         txtTelefono = new javax.swing.JTextField();
         txtDomicilio = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        botonListar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         comboCliente = new javax.swing.JComboBox<>();
         btnVerCompras = new javax.swing.JButton();
         txtApellido = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        botonListar = new javax.swing.JButton();
         panelTablaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable();
@@ -237,30 +237,6 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Datos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 490, 50));
 
-        botonListar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        botonListar.setForeground(new java.awt.Color(255, 255, 255));
-        botonListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png"))); // NOI18N
-        botonListar.setContentAreaFilled(false);
-        botonListar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        botonListar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botonListar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png")));
-        botonListar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png")));
-        botonListar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        botonListar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                botonListarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                botonListarMouseExited(evt);
-            }
-        });
-        botonListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonListarActionPerformed(evt);
-            }
-        });
-        Datos.add(botonListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 40, 40));
-
         jLabel7.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText(" Cliente");
@@ -303,6 +279,30 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         });
         Datos.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 200, 30));
         Datos.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+
+        botonListar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        botonListar.setForeground(new java.awt.Color(255, 255, 255));
+        botonListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lista_24.png"))); // NOI18N
+        botonListar.setContentAreaFilled(false);
+        botonListar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonListar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botonListar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lista_24.png"))); // NOI18N
+        botonListar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lista_32.png"))); // NOI18N
+        botonListar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botonListar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                botonListarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                botonListarMouseExited(evt);
+            }
+        });
+        botonListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonListarActionPerformed(evt);
+            }
+        });
+        Datos.add(botonListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 116, 100));
 
         getContentPane().add(Datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 560));
 
@@ -445,26 +445,6 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         }
     }//GEN-LAST:event_comboClienteActionPerformed
 
-    private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
-        // BOTON LISTAR TODO
-        try {
-            limpiarDatos();
-            cargarTabla();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-    }//GEN-LAST:event_botonListarActionPerformed
-
-    private void botonListarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListarMouseExited
-        // TODO add your handling code here:
-        botonListar.setText("");
-    }//GEN-LAST:event_botonListarMouseExited
-
-    private void botonListarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListarMouseEntered
-        // TODO add your handling code here:
-        botonListar.setText("Listar CLientes");
-    }//GEN-LAST:event_botonListarMouseEntered
-
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         char c = evt.getKeyChar();
         if (c<'0' || c> '9') evt.consume();
@@ -545,7 +525,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
                 int id = cdao.obtenerID(c.getNombre(), c.getApellido(), c.getDomicilio(), c.getTelefono());
                 c.setId(id);
             }
-            int confirm = JOptionPane.showConfirmDialog(this, "c.toStringCliente()", "Está seguro que desea eliminar el Cliente?", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, c.toStringCliente(), "Está seguro que desea eliminar el Cliente?", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 if (cdao.eliminar(c)) {
                     JOptionPane.showMessageDialog(this, "Cliente Eliminado de la Base de Datos", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -591,7 +571,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
                 int id = cdao.obtenerID(c.getNombre(), c.getApellido(), c.getDomicilio(), c.getTelefono());
                 c.setId(id);
             }
-            int confirm = JOptionPane.showConfirmDialog(this, "c.toStringCliente()", "Está seguro que desea modificar los datos?", JOptionPane.YES_NO_OPTION);
+            int confirm = JOptionPane.showConfirmDialog(this, c.toStringCliente(), "Está seguro que desea modificar los datos?", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 cdao.actualizar(c);
                 JOptionPane.showMessageDialog(this, "Cliente Actualizado en la Base de Datos", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
@@ -624,8 +604,6 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         // BOTON AGREGAR CLIENTE
         Persona c = crearCliente();
         if (c != null) {
-//            c.setCategoria(Personas.CLIENTE);
-//            c.setContraseña("");
             try {
                 if ( cdao.nuevoCliente(c)) {
                     JOptionPane.showMessageDialog(this, "El cliente se ha registrado en la Base de Datos");
@@ -661,6 +639,26 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         char c = evt.getKeyChar();
         if ((c<'a' || c>'z') && (c<'A' || c>'Z')) evt.consume();
     }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void botonListarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListarMouseEntered
+        // TODO add your handling code here:
+        botonListar.setText("Listar CLientes");
+    }//GEN-LAST:event_botonListarMouseEntered
+
+    private void botonListarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonListarMouseExited
+        // TODO add your handling code here:
+        botonListar.setText("");
+    }//GEN-LAST:event_botonListarMouseExited
+
+    private void botonListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonListarActionPerformed
+        // BOTON LISTAR TODO
+        try {
+            limpiarDatos();
+            cargarTabla();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_botonListarActionPerformed
  
     public void inicializarTabla() {
         modelo.addColumn("Apellido");
@@ -690,7 +688,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
     }
      
     private boolean validarDomicilio(String variable) {
-        String patron = ".*[^a-zA-Z0-9ñÑáéíóúÁÉÍÓÚüÜ\\s].*";
+        String patron = ".*[^a-zA-Z0-9ÑÁÉÍÓÚüÜ\\s].*";
         Pattern pattern = Pattern.compile(patron);
         Matcher matcher = pattern.matcher(variable);
         if (variable.trim().isEmpty()) {
