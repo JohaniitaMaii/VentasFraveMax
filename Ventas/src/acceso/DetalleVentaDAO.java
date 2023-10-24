@@ -104,28 +104,28 @@ public class DetalleVentaDAO {
     }
     
     public List<DetalleVenta> buscarVentaCliente(int id) {
-        List<DetalleVenta> detaVentas = new ArrayList<>();
+         List<DetalleVenta> detaVentas = new ArrayList<>();
         Venta ve = null;
         DetalleVenta deta = null;
-        java.sql.Date fe = new java.sql.Date(0, 0, 0);
-        Producto pro = new Producto();
+        Producto pro = null;
         try {
             conn = conexion.conexionDB();
-            sql = "SELECT p.nombreProducto, p.precioActual, dv.cantidad, v.fechadeVenta"
-                    + "FROM venta v"
-                    + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta"
-                    + "INNER JOIN producto p ON dv.id_producto = p.id_producto"
+            sql = "SELECT p.nombreProducto, p.precioActual, dv.cantidad, v.fechadeVenta "
+                    + "FROM venta v "
+                    + "INNER JOIN detalleventa dv ON v.id_venta = dv.id_venta "
+                    + "INNER JOIN producto p ON dv.id_producto = p.id_producto "
                     + "where id_cliente = " + id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 ve = new Venta();
-                ve.setFechaVenta(rs.getDate("fechadeVenta"));
+                pro = new Producto();
                 deta = new DetalleVenta(ve,pro,0,0);
                 deta.getProducto().setNombreProducto(rs.getString("nombreProducto"));
                 deta.getProducto().setPrecioActual(rs.getDouble("precioActual"));
                 deta.setCantidad(rs.getInt("cantidad"));
+                deta.getVenta().setFechaVenta(rs.getDate("fechadeVenta"));
                 detaVentas.add(deta);
                 
             }

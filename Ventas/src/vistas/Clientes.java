@@ -76,6 +76,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCompras = new javax.swing.JTable();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
         setForeground(java.awt.Color.lightGray);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,7 +108,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         botonAgregar.setForeground(new java.awt.Color(255, 255, 255));
         botonAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cliente_24.png"))); // NOI18N
         botonAgregar.setContentAreaFilled(false);
-        botonAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonAgregar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cliente.png"))); // NOI18N
         botonAgregar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cliente_24.png"))); // NOI18N
@@ -131,7 +132,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         botonActualizar.setForeground(new java.awt.Color(255, 255, 255));
         botonActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/update_24.png"))); // NOI18N
         botonActualizar.setContentAreaFilled(false);
-        botonActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonActualizar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/actualizar.png"))); // NOI18N
         botonActualizar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/update_24.png"))); // NOI18N
@@ -155,7 +156,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         botonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         botonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trash_24.png"))); // NOI18N
         botonEliminar.setContentAreaFilled(false);
-        botonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonEliminar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trash_24.png"))); // NOI18N
         botonEliminar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trash.png"))); // NOI18N
@@ -177,7 +178,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
         btnBuscar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/search-engine-optimization.png"))); // NOI18N
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -196,7 +197,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/escoba.png"))); // NOI18N
-        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnLimpiar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnLimpiar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -238,12 +239,12 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
         botonListar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         botonListar.setForeground(new java.awt.Color(255, 255, 255));
-        botonListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lista_24.png"))); // NOI18N
+        botonListar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png"))); // NOI18N
         botonListar.setContentAreaFilled(false);
-        botonListar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonListar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         botonListar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        botonListar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lista_24.png"))); // NOI18N
-        botonListar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/lista_32.png"))); // NOI18N
+        botonListar.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png")));
+        botonListar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png")));
         botonListar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         botonListar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -258,7 +259,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
                 botonListarActionPerformed(evt);
             }
         });
-        Datos.add(botonListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 116, 100));
+        Datos.add(botonListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 380, 40, 40));
 
         jLabel7.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 15)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,7 +268,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
         comboCliente.setSelectedIndex(-1);
         comboCliente.setBorder(null);
-        comboCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        comboCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         comboCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboClienteActionPerformed(evt);
@@ -277,7 +278,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
 
         btnVerCompras.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnVerCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/shopping-cart.png"))); // NOI18N
-        btnVerCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVerCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVerCompras.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnVerCompras.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnVerCompras.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -325,7 +326,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
                 return canEdit [columnIndex];
             }
         });
-        tablaClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tablaClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaClientes.setSelectionBackground(new java.awt.Color(51, 51, 51));
         tablaClientes.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
