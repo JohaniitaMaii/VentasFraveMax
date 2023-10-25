@@ -87,7 +87,14 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "ID= " + idProducto + ", Nombre= " + nombreProducto + ", Descripción= " + descripcion + ", Precio= " + precioActual + ", Stock= " + stock;
+        String m = "";
+        if (stock > 0) {
+                m = "En Stock";
+            } else {
+                m = "Agotado";
+            }
+        return "ID= " + idProducto + ", Nombre= " + nombreProducto + ", Descripción= " + descripcion 
+                + ", Precio= $ " + precioActual + ", Stock= " + stock+ ", Estado= "+m;
     }
-
+    
 }

@@ -44,6 +44,7 @@ public class ListaPro extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -67,9 +68,9 @@ public class ListaPro extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,16 +90,17 @@ public class ListaPro extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(219, 219, 219)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(262, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(244, 244, 244))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -106,7 +108,7 @@ public class ListaPro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,18 +122,33 @@ public class ListaPro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void cargarTabla() {
-        modelo.addColumn("ID Producto");
+        String m = "";
+        modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Descripción");
-        modelo.addColumn("Precio Unidad");
+        modelo.addColumn("Precio/u");
         modelo.addColumn("Stock");
         modelo.addColumn("Estado");
         tabla.setModel(modelo);
 
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(10);
+            tabla.getColumnModel().getColumn(1).setMinWidth(150);
+            tabla.getColumnModel().getColumn(2).setMinWidth(400);
+            tabla.getColumnModel().getColumn(3).setMinWidth(100);
+            tabla.getColumnModel().getColumn(4).setMinWidth(30);
+            tabla.getColumnModel().getColumn(5).setMinWidth(50);
+        }
+
         productos = prodao.listarProductos();
         for (Producto p : productos) {
+            if (p.getStock() > 0) {
+                m = "En Stock";
+            } else {
+                m = "Agotado";
+            }
             modelo.addRow(new Object[]{p.getIdProducto(), p.getNombreProducto(), p.getDescripcion(),
-                 p.getPrecioActual(), p.getStock(), p.isEstado()});
+                "$ "+p.getPrecioActual(), p.getStock(), m});
         }
 
     }

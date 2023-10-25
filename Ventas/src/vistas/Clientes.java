@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class Clientes extends javax.swing.JFrame {
 private  DefaultTableModel modeloCompra = new DefaultTableModel();
 private DefaultTableModel modelo = new DefaultTableModel();
-ImageIcon icono = new ImageIcon("C:\\Users\\johan\\Documents\\GitHub\\VentasFraveMax\\Ventas\\src\\iconos\\client.png");
+ImageIcon icono = new ImageIcon("C:\\Users\\Ed\\Documents\\GitHub\\VentasFraveMax\\Ventas\\src\\iconos\\client.png");
 ClienteDAO cdao = new ClienteDAO();
 DetalleVentaDAO dedao = new DetalleVentaDAO();
 

@@ -59,6 +59,7 @@ public class Productos_Fecha extends javax.swing.JFrame {
             }
         });
 
+        tabla.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -80,8 +81,8 @@ public class Productos_Fecha extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(3).setMinWidth(90);
             tabla.getColumnModel().getColumn(5).setMinWidth(90);
-            tabla.getColumnModel().getColumn(5).setHeaderValue("Precio/Total");
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -91,20 +92,20 @@ public class Productos_Fecha extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(298, 298, 298)
+                        .addGap(362, 362, 362)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(dateChosser, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 924, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(dateChosser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(39, 39, 39)
@@ -125,14 +126,14 @@ public class Productos_Fecha extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(166, 166, 166))
+                .addGap(213, 213, 213))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,7 +163,7 @@ public class Productos_Fecha extends javax.swing.JFrame {
                 productos = prodao.listaProductosporFecha(dateChosser.getDate());
                 for (Producto p : productos) {
                     modelo.addRow(new Object[]{p.getIdProducto(), p.getNombreProducto(), p.getDescripcion(),
-                        p.getPrecioActual(), p.getStock(), p.getPrecioActual() * p.getStock()});
+                        "$ " + p.getPrecioActual(), p.getStock(), "$ " + p.getPrecioActual() * p.getStock()});
                 }
             } catch (Exception e) {
                 System.out.println("Error al ejecutar el DateChosser");
@@ -179,6 +180,13 @@ public class Productos_Fecha extends javax.swing.JFrame {
         modelo.addColumn("Precio/Total");
         tabla.setModel(modelo);
         modelo.setRowCount(0);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(10);
+            tabla.getColumnModel().getColumn(1).setMinWidth(150);
+            tabla.getColumnModel().getColumn(2).setMinWidth(400);
+            tabla.getColumnModel().getColumn(3).setMinWidth(90);
+            tabla.getColumnModel().getColumn(5).setMinWidth(90);
+        }
     }
 
     /**

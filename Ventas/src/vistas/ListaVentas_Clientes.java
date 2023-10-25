@@ -154,13 +154,13 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
         ventas = vedao.obtenerVentasPorIDCliente(cliente.getIdCliente());
         for (Venta v : ventas) {
             Persona p = clidao.buscarId(v.getCliente().getIdCliente());
-                    modelo.addRow(new Object[]{v.getIdVenta(),p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
+                    modelo.addRow(new Object[]{v.getIdVenta(),p.getId()+" "+p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
         }
     }//GEN-LAST:event_boxActionPerformed
 
     public void cargarTabla() {
         modelo.addColumn("ID Venta");
-        modelo.addColumn("ID Cliente");
+        modelo.addColumn("Cliente");
         modelo.addColumn("Fecha");
         tabla.setModel(modelo);
         modelo.setRowCount(0);

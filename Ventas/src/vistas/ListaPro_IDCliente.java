@@ -57,17 +57,17 @@ public class ListaPro_IDCliente extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(178, 178, 178)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
@@ -105,7 +105,7 @@ public class ListaPro_IDCliente extends javax.swing.JFrame {
             tabla.getColumnModel().getColumn(0).setMinWidth(10);
             tabla.getColumnModel().getColumn(1).setMinWidth(150);
             tabla.getColumnModel().getColumn(2).setMinWidth(400);
-            tabla.getColumnModel().getColumn(5).setMinWidth(90);
+            tabla.getColumnModel().getColumn(5).setMinWidth(50);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -116,11 +116,11 @@ public class ListaPro_IDCliente extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(box, 0, 705, Short.MAX_VALUE)
+                .addComponent(box, 0, 796, Short.MAX_VALUE)
                 .addGap(46, 46, 46))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 905, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -160,7 +160,7 @@ public class ListaPro_IDCliente extends javax.swing.JFrame {
         productos = prodao.listaProductosporID(cliente.getIdCliente());
         for (Producto p : productos) {
             modelo.addRow(new Object[]{p.getIdProducto(), p.getNombreProducto(), p.getDescripcion(),
-                p.getPrecioActual(), p.getStock(), p.getPrecioActual()*p.getStock()});
+                "$ "+p.getPrecioActual(), p.getStock(), "$ "+p.getPrecioActual() * p.getStock()});
         }
     }//GEN-LAST:event_boxActionPerformed
 
@@ -173,6 +173,12 @@ public class ListaPro_IDCliente extends javax.swing.JFrame {
         modelo.addColumn("Precio/Total");
         tabla.setModel(modelo);
         modelo.setRowCount(0);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(10);
+            tabla.getColumnModel().getColumn(1).setMinWidth(150);
+            tabla.getColumnModel().getColumn(2).setMinWidth(400);
+            tabla.getColumnModel().getColumn(5).setMinWidth(50);
+        }
     }
 
     public void cargarCombo() {

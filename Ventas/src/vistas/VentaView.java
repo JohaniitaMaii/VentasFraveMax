@@ -85,9 +85,9 @@ public class VentaView extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(442, 442, 442)
+                .addGap(486, 486, 486)
                 .addComponent(jLabel1)
-                .addContainerGap(484, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,15 +99,15 @@ public class VentaView extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setForeground(new java.awt.Color(0, 51, 102));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 102));
         jLabel3.setText("Cliente:");
 
-        lblProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblProducto.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblProducto.setForeground(new java.awt.Color(0, 51, 102));
         lblProducto.setText("Producto:");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
         jLabel5.setText("Fecha:");
 
@@ -120,7 +120,7 @@ public class VentaView extends javax.swing.JFrame {
 
         DateChooser.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        lblCantidad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblCantidad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblCantidad.setForeground(new java.awt.Color(0, 51, 102));
         lblCantidad.setText("Cantidad:");
 
@@ -131,7 +131,7 @@ public class VentaView extends javax.swing.JFrame {
             }
         });
 
-        lblPrecio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblPrecio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrecio.setForeground(new java.awt.Color(0, 51, 102));
         lblPrecio.setText("Precio:");
 
@@ -142,6 +142,7 @@ public class VentaView extends javax.swing.JFrame {
         btnRealizarVenta.setBackground(new java.awt.Color(0, 51, 102));
         btnRealizarVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnRealizarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnRealizarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/venta.png"))); // NOI18N
         btnRealizarVenta.setText("Realizar Venta");
         btnRealizarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +155,7 @@ public class VentaView extends javax.swing.JFrame {
         btnIniciarVenta.setBackground(new java.awt.Color(0, 51, 102));
         btnIniciarVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnIniciarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnIniciarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/iniciarVenta.png"))); // NOI18N
         btnIniciarVenta.setText("Iniciar una venta");
         btnIniciarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +187,7 @@ public class VentaView extends javax.swing.JFrame {
         btnCancelarVenta.setBackground(new java.awt.Color(0, 51, 102));
         btnCancelarVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCancelarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cruz.png"))); // NOI18N
         btnCancelarVenta.setText("Cancelar Venta");
         btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,6 +198,7 @@ public class VentaView extends javax.swing.JFrame {
         btnCarrito.setBackground(new java.awt.Color(0, 51, 102));
         btnCarrito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCarrito.setForeground(new java.awt.Color(255, 255, 255));
+        btnCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/carrito.png"))); // NOI18N
         btnCarrito.setText("Agregar al Carrito");
         btnCarrito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,33 +224,33 @@ public class VentaView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRealizarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnCancelarVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnRealizarVenta)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnCancelarVenta))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnQuitarProductoTabla)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblPrecio)
-                                .addComponent(lblProducto)
-                                .addComponent(lblCantidad)
+                                .addComponent(jScrollPane1)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel3)
-                                        .addComponent(jLabel5))
-                                    .addGap(62, 62, 62)
+                                        .addComponent(jLabel5)
+                                        .addComponent(lblProducto)
+                                        .addComponent(lblCantidad)
+                                        .addComponent(lblPrecio))
+                                    .addGap(25, 25, 25)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblPrecioTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(btnIniciarVenta)
-                                            .addComponent(DateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(comboProductos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(comboClientes, 0, 856, Short.MAX_VALUE))
-                                        .addComponent(btnCarrito)))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 964, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(comboCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(comboProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 953, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(DateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnIniciarVenta, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addComponent(btnCarrito)))))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -383,8 +387,8 @@ public class VentaView extends javax.swing.JFrame {
                 detalle.setPrecioTotal((pro.getPrecioActual() * (Integer) comboCantidad.getSelectedItem()));
                 listaDetalles.add(detalle);
 
-                modelo.addRow(new Object[]{pro.getIdProducto(), pro.getNombreProducto(), pro.getDescripcion(), pro.getPrecioActual(),//Agrego el producto a la tabla
-                    comboCantidad.getSelectedItem(), (pro.getPrecioActual() * (Integer) comboCantidad.getSelectedItem())});
+                modelo.addRow(new Object[]{pro.getIdProducto(), pro.getNombreProducto(), pro.getDescripcion(), "$ "+pro.getPrecioActual(),//Agrego el producto a la tabla
+                    comboCantidad.getSelectedItem(), "$ "+(pro.getPrecioActual() * (Integer) comboCantidad.getSelectedItem())});
                 pro.setStock(pro.getStock() - (Integer) comboCantidad.getSelectedItem());//Seteo el stock  
                 prodao.modificarProducto(pro);//Modifico en la base de datos el stock               
             } else {
@@ -473,6 +477,12 @@ public class VentaView extends javax.swing.JFrame {
         modelo.addColumn("Cantidad");
         modelo.addColumn("Precio Total");
         tabla.setModel(modelo);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setMinWidth(10);
+            tabla.getColumnModel().getColumn(1).setMinWidth(150);
+            tabla.getColumnModel().getColumn(2).setMinWidth(400);
+            tabla.getColumnModel().getColumn(5).setMinWidth(50);
+        }
     }
 
     public void bloqueados() {

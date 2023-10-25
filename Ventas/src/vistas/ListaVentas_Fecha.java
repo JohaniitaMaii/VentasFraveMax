@@ -160,7 +160,7 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
                 
                 for (Venta v : ventas) {
                     Persona p = clidao.buscarId(v.getCliente().getIdCliente());
-                    modelo.addRow(new Object[]{v.getIdVenta(),p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
+                    modelo.addRow(new Object[]{v.getIdVenta(),p.getId()+" "+p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
             }
         } catch (Exception e) {
             System.out.println("Error al ejecutar el DateChosser");
