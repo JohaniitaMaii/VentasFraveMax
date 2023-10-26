@@ -80,7 +80,7 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         setForeground(java.awt.Color.lightGray);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Datos.setBackground(new java.awt.Color(51, 51, 51));
+        Datos.setBackground(new java.awt.Color(0, 0, 102));
         Datos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
@@ -332,7 +332,6 @@ DetalleVentaDAO dedao = new DetalleVentaDAO();
         });
         tablaClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaClientes.setSelectionBackground(new java.awt.Color(51, 51, 51));
-        tablaClientes.setSelectionForeground(new java.awt.Color(255, 255, 255));
         tablaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaClientesMouseClicked(evt);
