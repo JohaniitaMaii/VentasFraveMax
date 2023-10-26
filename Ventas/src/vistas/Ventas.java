@@ -6,12 +6,18 @@
 package vistas;
 
 import acceso.ClienteDAO;
-import acceso.ProductoDAO;
+import acceso.DetalleVentaDAO;
 import entidades.Cliente;
+import acceso.ProductoDAO;
+import acceso.VentaDAO;
+import entidades.DetalleVenta;
+import entidades.Persona;
 import entidades.Producto;
+import entidades.Venta;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,8 +27,15 @@ public class Ventas extends javax.swing.JFrame {
 
     ProductoDAO prodao = new ProductoDAO();
     ClienteDAO clidao = new ClienteDAO();
+    VentaDAO vendao = new VentaDAO();
+    DetalleVentaDAO detdao = new DetalleVentaDAO();
     List<Producto> listaproductos = new ArrayList();
     List<Cliente> listaClientes = new ArrayList();
+    List<Venta> venta = new ArrayList();
+    List<DetalleVenta> detalle = new ArrayList();
+    private DefaultTableModel modelo = new DefaultTableModel();
+    List<Producto> productos = new ArrayList();
+
 
     /**
      * Creates new form Ventas
@@ -30,6 +43,7 @@ public class Ventas extends javax.swing.JFrame {
     public Ventas() {
         initComponents();
         cargarCombo();
+        cargarTabla();
     }
 
     /**
@@ -42,26 +56,23 @@ public class Ventas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtIDVenta = new javax.swing.JTextField();
-        btnBuscarProducto = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JButton();
-        btnEliminar1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jFecha = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         comboClientes = new javax.swing.JComboBox<>();
         comboProductos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtIDVenta1 = new javax.swing.JTextField();
-        btnEliminar2 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
-        btnSalir1 = new javax.swing.JButton();
+        btnListarTodo = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -71,34 +82,10 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 102));
-        jLabel2.setText("Cant. Producto:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, 20));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 51, 102));
         jLabel3.setText("Fecha:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, -1, 20));
-
-        txtIDVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtIDVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDVentaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtIDVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 120, -1));
-
-        btnBuscarProducto.setBackground(new java.awt.Color(0, 51, 102));
-        btnBuscarProducto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnBuscarProducto.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuscarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/search-engine-optimization.png"))); // NOI18N
-        btnBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarProductoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 140, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 51, 102));
@@ -122,29 +109,35 @@ public class Ventas extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 170, 30));
+        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 170, 30));
 
-        btnEliminar1.setBackground(new java.awt.Color(0, 51, 102));
-        btnEliminar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnEliminar1.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trash_24.png"))); // NOI18N
-        btnEliminar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEliminar.setBackground(new java.awt.Color(0, 51, 102));
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/trash_24.png"))); // NOI18N
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnEliminar1MouseReleased(evt);
+                btnEliminarMouseReleased(evt);
             }
         });
-        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar1ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 150, 30));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 150, 30));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Filtrar por:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
-        jPanel1.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 200, -1));
+
+        jFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jFechaPropertyChange(evt);
+            }
+        });
+        jPanel1.add(jFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 200, 30));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 51, 102));
@@ -152,10 +145,20 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
         comboClientes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 640, -1));
+        comboClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboClientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 620, -1));
 
         comboProductos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 640, -1));
+        comboProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboProductosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(comboProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 620, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 102));
@@ -163,22 +166,27 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, 20));
 
         txtIDVenta1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jPanel1.add(txtIDVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 120, -1));
-
-        btnEliminar2.setBackground(new java.awt.Color(0, 51, 102));
-        btnEliminar2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnEliminar2.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/update_24.png"))); // NOI18N
-        btnEliminar2.addActionListener(new java.awt.event.ActionListener() {
+        txtIDVenta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminar2ActionPerformed(evt);
+                txtIDVenta1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 170, 30));
+        jPanel1.add(txtIDVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 240, -1));
+
+        btnActualizar.setBackground(new java.awt.Color(0, 51, 102));
+        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/update_24.png"))); // NOI18N
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 170, 30));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -186,8 +194,8 @@ public class Ventas extends javax.swing.JFrame {
                 "Id Venta", "Fecha", "Producto", "Cantidad", "Precio Final"
             }
         ));
-        jTable1.setToolTipText("");
-        jScrollPane1.setViewportView(jTable1);
+        jTable.setToolTipText("");
+        jScrollPane1.setViewportView(jTable);
 
         btnSalir.setBackground(new java.awt.Color(0, 51, 102));
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -199,13 +207,13 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
-        btnSalir1.setBackground(new java.awt.Color(0, 51, 102));
-        btnSalir1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnSalir1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir1.setText("Listar Todo");
-        btnSalir1.addActionListener(new java.awt.event.ActionListener() {
+        btnListarTodo.setBackground(new java.awt.Color(0, 51, 102));
+        btnListarTodo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnListarTodo.setForeground(new java.awt.Color(255, 255, 255));
+        btnListarTodo.setText("Listar Todo");
+        btnListarTodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalir1ActionPerformed(evt);
+                btnListarTodoActionPerformed(evt);
             }
         });
 
@@ -220,7 +228,7 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(64, 64, 64)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListarTodo, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -230,7 +238,7 @@ public class Ventas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalir1)
+                .addComponent(btnListarTodo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addContainerGap())
@@ -272,8 +280,8 @@ public class Ventas extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -290,67 +298,182 @@ public class Ventas extends javax.swing.JFrame {
         for (Producto pro : listaproductos) {
             comboProductos.addItem(pro);
         }
+        
 
     }
 
 
     private void btnLimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseEntered
-        // TODO add your handling code here:
-        btnLimpiar.setText("Limpiar");
+        // Quiero eliminar este metodo pero no me deja:
+        
     }//GEN-LAST:event_btnLimpiarMouseEntered
 
     private void btnLimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLimpiarMouseExited
-        // TODO add your handling code here:
-        btnLimpiar.setText("");
+        // Quiero eliminar este metodo pero no me deja:
+        
     }//GEN-LAST:event_btnLimpiarMouseExited
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // BOTON SALIR
+        // BOTON SALIR: Completo(Tampoco era mucho jaja)
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1ActionPerformed
-
-    private void btnEliminar1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminar1MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar1MouseReleased
-
-    private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarProductoActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // Eliminar una Venta seleccionada:(Falta Completar)
+    }//GEN-LAST:event_btnEliminarActionPerformed
+ 
+    private void btnEliminarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseReleased
+        // Quiero eliminar este metodo pero no me deja:
+    }//GEN-LAST:event_btnEliminarMouseReleased
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        // Limpiar textfields: Completo
+        txtIDVenta1.setText("");
+        jFecha.setDate(null);
+        comboClientes.setSelectedItem(null);
+        comboProductos.setSelectedItem(null);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
-    private void btnSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalir1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSalir1ActionPerformed
+    private void btnListarTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarTodoActionPerformed
+        // Listar todo: Completo(Falta solo el id Producto)
+        modelo.setRowCount(0);
+        txtIDVenta1.setText("");
+        jFecha.setDate(null);
+        comboClientes.setSelectedItem(null);
+        comboProductos.setSelectedItem(null);
+        venta = vendao.listarVentas();
+        for (Venta v : venta){           
+            detalle = detdao.buscarVentaCliente(v.getCliente().getIdCliente());
+            for (DetalleVenta vd : detalle){
+            modelo.addRow(new Object[]{v.getIdVenta(), vd.getVenta().getFechaVenta(), vd.getProducto().getIdProducto()+" "+ vd.getProducto().getNombreProducto(), vd.getCantidad(), vd.getProducto().getPrecioActual()*vd.getCantidad()});
+        }
+        }
+        
+    }//GEN-LAST:event_btnListarTodoActionPerformed
 
-    private void txtIDVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDVentaActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDVentaActionPerformed
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void btnEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminar2ActionPerformed
+    private void jFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jFechaPropertyChange
+        // Listar Ventas por fechas: Completo(Falta solo el id Producto)
+        modelo.setRowCount(0);
+        if (jFecha.getDate() != null) {
+            txtIDVenta1.setText("");
+            comboClientes.setSelectedItem(null);
+            comboProductos.setSelectedItem(null);
+            try {
+                venta = vendao.obtenerVentasPorFecha(jFecha.getDate());
+                for (Venta v : venta) {
+                    detalle = detdao.buscarVentaCliente(v.getCliente().getIdCliente());
+                    for (DetalleVenta vd : detalle){
+                        modelo.addRow(new Object[]{v.getIdVenta(), vd.getVenta().getFechaVenta(), vd.getProducto().getIdProducto()+" "+ vd.getProducto().getNombreProducto(), vd.getCantidad(), vd.getProducto().getPrecioActual()*vd.getCantidad()});
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error al ejecutar el DateChosser");
+            }
+        }
+        /*
+        
+        
+        */
+    }//GEN-LAST:event_jFechaPropertyChange
 
+    private void comboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboClientesActionPerformed
+        // Listar ventas por clientes: Completo(Falta solo el id Producto)
+        modelo.setRowCount(0);
+        txtIDVenta1.setText("");
+        jFecha.setDate(null);
+        comboProductos.setSelectedItem(null);
+        Cliente cliente = (Cliente) comboClientes.getSelectedItem();
+        detalle = detdao.buscarVentaCliente(cliente.getIdCliente());
+        for (DetalleVenta vd : detalle){
+            modelo.addRow(new Object[]{vd.getVenta().getIdVenta(), vd.getVenta().getFechaVenta(), vd.getProducto().getIdProducto()+" "+ vd.getProducto().getNombreProducto(), vd.getCantidad(), vd.getProducto().getPrecioActual()*vd.getCantidad()});
+        }
+    }//GEN-LAST:event_comboClientesActionPerformed
+
+    private void txtIDVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDVenta1ActionPerformed
+        // Buscar venta por ID:(Falta Completar)
+        modelo.setRowCount(0);
+        jFecha.setDate(null);
+        comboClientes.setSelectedItem(null);
+        comboProductos.setSelectedItem(null);
+    }//GEN-LAST:event_txtIDVenta1ActionPerformed
+
+    private void comboProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProductosActionPerformed
+        // Listar las ventas de un producto en particular: Falta Completar
+        modelo.setRowCount(0);
+        txtIDVenta1.setText("");
+        jFecha.setDate(null);
+        comboClientes.setSelectedItem(null);
+        Producto producto = (Producto) comboProductos.getSelectedItem();
+        
+        
+    }//GEN-LAST:event_comboProductosActionPerformed
+
+    public void cargarTabla() {
+        modelo.addColumn("Id Venta");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Producto");
+        modelo.addColumn("Cantidad");
+        modelo.addColumn("Precio/Total");
+        jTable.setModel(modelo);
+        modelo.setRowCount(0);
+       
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Ventas().setVisible(true);
+            }
+        });
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarProducto;
-    private javax.swing.JButton btnEliminar1;
-    private javax.swing.JButton btnEliminar2;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnListarTodo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnSalir1;
     private javax.swing.JComboBox<Cliente> comboClientes;
     private javax.swing.JComboBox<Producto> comboProductos;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -359,8 +482,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField txtIDVenta;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField txtIDVenta1;
     // End of variables declaration//GEN-END:variables
 }
