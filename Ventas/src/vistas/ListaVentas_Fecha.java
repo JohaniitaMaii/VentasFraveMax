@@ -1,6 +1,8 @@
 package vistas;
 
 import acceso.ClienteDAO;
+import acceso.DetalleVentaDAO;
+import acceso.ProductoDAO;
 import acceso.VentaDAO;
 import entidades.*;
 import java.util.*;
@@ -13,10 +15,14 @@ import javax.swing.table.DefaultTableModel;
 public class ListaVentas_Fecha extends javax.swing.JFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo2 = new DefaultTableModel();
     List<Venta> ventas = new ArrayList<>();
     VentaDAO vedao = new VentaDAO();
     ClienteDAO clidao = new ClienteDAO();
-    
+    List<DetalleVenta> detalles = new ArrayList();
+    DetalleVentaDAO detadao = new DetalleVentaDAO();
+    ProductoDAO prodao = new ProductoDAO();
+
     /**
      * Creates new form ListaVentas_Fecha
      */
@@ -42,6 +48,8 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,16 +64,16 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(182, 182, 182)
+                .addGap(191, 191, 191)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         dateChosser.setForeground(new java.awt.Color(0, 51, 102));
@@ -99,37 +107,68 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
         if (tabla.getColumnModel().getColumnCount() > 0) {
             tabla.getColumnModel().getColumn(0).setMinWidth(5);
             tabla.getColumnModel().getColumn(1).setMinWidth(400);
         }
 
+        tabla2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Detalle", "ID Venta", "Producto", "Cantidad", "Precio Total"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tabla2);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(dateChosser, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(296, 296, 296))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(dateChosser, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dateChosser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,31 +192,58 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
     private void dateChosserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChosserPropertyChange
         // DATE CHOSSER FECHA
         modelo.setRowCount(0);
+        modelo2.setRowCount(0);
         if (dateChosser.getDate() != null) {
 
             try {
                 ventas = vedao.obtenerVentasPorFecha(dateChosser.getDate());
-                
+
                 for (Venta v : ventas) {
                     Persona p = clidao.buscarId(v.getCliente().getIdCliente());
-                    modelo.addRow(new Object[]{v.getIdVenta(),p.getId()+" "+p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
+                    modelo.addRow(new Object[]{v.getIdVenta(), p.getId() + " " + p.getNombre() + " " + p.getApellido(), v.getFechaVenta()});
+                }
+            } catch (Exception e) {
+                System.out.println("Error al ejecutar el DateChosser");
             }
-        } catch (Exception e) {
-            System.out.println("Error al ejecutar el DateChosser");
-        }
         }
     }//GEN-LAST:event_dateChosserPropertyChange
 
-     public void cargarTabla() {
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // tabla 1
+        modelo2.setRowCount(0);
+        int filaSeleccionada = tabla.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int id = (int) tabla.getValueAt(filaSeleccionada, 0);
+            detalles = detadao.listarDetalleVentas(id);
+            for (DetalleVenta deta : detalles) {
+                Producto pro = prodao.buscarPorID(deta.getProducto().getIdProducto());
+                modelo2.addRow(new Object[]{deta.getIdDetalle(), deta.getVenta().getIdVenta(), pro.getIdProducto() + " " + pro.getNombreProducto(),
+                    deta.getCantidad(), "$ " + deta.getPrecioTotal()});
+            }
+        }
+    }//GEN-LAST:event_tablaMouseClicked
+
+    public void cargarTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Cliente");
         modelo.addColumn("Fecha");
         tabla.setModel(modelo);
         modelo.setRowCount(0);
+
+        modelo2.addColumn("ID Detalle");
+        modelo2.addColumn("ID Venta");
+        modelo2.addColumn("Producto");
+        modelo2.addColumn("Cantidad");
+        modelo2.addColumn("Precio Total");
+        tabla2.setModel(modelo2);
+        modelo2.setRowCount(0);
+        if (tabla2.getColumnModel().getColumnCount() > 0) {
+            tabla2.getColumnModel().getColumn(0).setMinWidth(10);
+            tabla2.getColumnModel().getColumn(1).setMinWidth(10);
+            tabla2.getColumnModel().getColumn(2).setMinWidth(300);
+        }
     }
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -220,6 +286,8 @@ public class ListaVentas_Fecha extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tabla;
+    private javax.swing.JTable tabla2;
     // End of variables declaration//GEN-END:variables
 }

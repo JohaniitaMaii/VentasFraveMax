@@ -1,9 +1,13 @@
 package vistas;
 
 import acceso.ClienteDAO;
+import acceso.DetalleVentaDAO;
+import acceso.ProductoDAO;
 import acceso.VentaDAO;
 import entidades.Cliente;
+import entidades.DetalleVenta;
 import entidades.Persona;
+import entidades.Producto;
 import entidades.Venta;
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,10 +19,14 @@ import javax.swing.table.DefaultTableModel;
 public class ListaVentas_Clientes extends javax.swing.JFrame {
 
     private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo2 = new DefaultTableModel();
     ClienteDAO clidao = new ClienteDAO();
     VentaDAO vedao = new VentaDAO();
     List<Venta> ventas = new ArrayList();
     List<Cliente> listaClientes = new ArrayList();
+    DetalleVentaDAO detadao = new DetalleVentaDAO();
+    ProductoDAO prodao = new ProductoDAO();
+    List<DetalleVenta> detalles = new ArrayList();
 
     /**
      * Creates new form ListaVentas_Clientes
@@ -46,6 +54,8 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabla2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -60,7 +70,7 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(190, Short.MAX_VALUE)
+                .addContainerGap(176, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(159, 159, 159))
         );
@@ -99,23 +109,49 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabla);
+
+        tabla2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Detalle", "ID Venta", "Producto", "Cantidad", "Precio Total"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tabla2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
                         .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addComponent(box, 0, 683, Short.MAX_VALUE)))
-                .addGap(15, 15, 15))
+                        .addGap(18, 18, 18)
+                        .addComponent(box, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(84, 84, 84))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +160,11 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(32, 32, 32)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,13 +188,29 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
     private void boxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxActionPerformed
         // LLENAR TABLA CON PRODUCTOS
         modelo.setRowCount(0);
+        modelo2.setRowCount(0);
         Cliente cliente = (Cliente) box.getSelectedItem();
         ventas = vedao.obtenerVentasPorIDCliente(cliente.getIdCliente());
         for (Venta v : ventas) {
             Persona p = clidao.buscarId(v.getCliente().getIdCliente());
-                    modelo.addRow(new Object[]{v.getIdVenta(),p.getId()+" "+p.getNombre()+" "+p.getApellido(),v.getFechaVenta()});
+            modelo.addRow(new Object[]{v.getIdVenta(), p.getId() + " " + p.getNombre() + " " + p.getApellido(), v.getFechaVenta()});
         }
     }//GEN-LAST:event_boxActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        // TABLA 1
+        modelo2.setRowCount(0);
+        int filaSeleccionada = tabla.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            int id = (int) tabla.getValueAt(filaSeleccionada, 0);
+            detalles = detadao.listarDetalleVentas(id);
+            for (DetalleVenta deta : detalles) {
+                Producto pro = prodao.buscarPorID(deta.getProducto().getIdProducto());
+                modelo2.addRow(new Object[]{deta.getIdDetalle(), deta.getVenta().getIdVenta(), pro.getIdProducto() + " " + pro.getNombreProducto(),
+                    deta.getCantidad(), "$ " + deta.getPrecioTotal()});
+            }
+        }
+    }//GEN-LAST:event_tablaMouseClicked
 
     public void cargarTabla() {
         modelo.addColumn("ID Venta");
@@ -164,6 +218,19 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
         modelo.addColumn("Fecha");
         tabla.setModel(modelo);
         modelo.setRowCount(0);
+
+        modelo2.addColumn("ID Detalle");
+        modelo2.addColumn("ID Venta");
+        modelo2.addColumn("Producto");
+        modelo2.addColumn("Cantidad");
+        modelo2.addColumn("Precio Total");
+        tabla2.setModel(modelo2);
+        modelo2.setRowCount(0);
+        if (tabla2.getColumnModel().getColumnCount() > 0) {
+            tabla2.getColumnModel().getColumn(0).setMinWidth(10);
+            tabla2.getColumnModel().getColumn(1).setMinWidth(10);
+            tabla2.getColumnModel().getColumn(2).setMinWidth(300);
+        }
     }
 
     public void cargarCombo() {
@@ -216,6 +283,8 @@ public class ListaVentas_Clientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tabla;
+    private javax.swing.JTable tabla2;
     // End of variables declaration//GEN-END:variables
 }

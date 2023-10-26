@@ -141,5 +141,40 @@ public class DetalleVentaDAO {
        return detaVentas; 
     }
     
-    
+    public List<DetalleVenta> listarDetalleVentas(int id) {//traer detalles con un ID VENTA
+        Cliente cliente = null;
+        Producto producto = null;
+        Venta venta = null;
+        DetalleVenta detalleVenta = null;
+        List<DetalleVenta> detalles = new ArrayList();
+
+        try {
+            conn = conexion.conexionDB();
+            sql = "SELECT * FROM detalleventa WHERE id_venta = "+id;
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cliente = new Cliente();
+                producto = new Producto();
+                venta = new Venta(cliente);
+                detalleVenta = new DetalleVenta(venta, producto);
+                detalleVenta.setIdDetalle(rs.getInt("id_detalleVenta"));
+                detalleVenta.getVenta().setIdVenta(rs.getInt("id_venta"));
+                detalleVenta.getProducto().setIdProducto(rs.getInt("id_producto"));
+                detalleVenta.setCantidad(rs.getInt("cantidad"));
+                detalleVenta.setPrecioTotal(rs.getDouble("precioTotalVentas"));
+                detalles.add(detalleVenta);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al listar los detalles de ventas");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+        return detalles;
+    }
 }

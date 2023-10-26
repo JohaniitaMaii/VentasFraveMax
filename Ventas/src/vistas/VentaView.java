@@ -355,6 +355,7 @@ public class VentaView extends javax.swing.JFrame {
             bloqueados();
             comboClientes.setEnabled(true);
             DateChooser.setEnabled(true);
+            DateChooser.setDate(null);
             listaDetalles.clear();
         }
         if (pregunta == JOptionPane.NO_OPTION) {
