@@ -15,7 +15,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaClientes_Productos extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }        
+    };
     ProductoDAO prodao = new ProductoDAO();
     ClienteDAO clidao = new ClienteDAO();
     VentaDAO vedao = new VentaDAO();
@@ -93,7 +98,7 @@ public class ListaClientes_Productos extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

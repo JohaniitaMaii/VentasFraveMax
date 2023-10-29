@@ -18,7 +18,12 @@ import javax.swing.table.TableModel;
  */
 public class VentaView extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }       
+    };
 //    Cliente cliente = new Cliente();
     ProductoDAO prodao = new ProductoDAO();
     ClienteDAO clidao = new ClienteDAO();
@@ -309,7 +314,9 @@ public class VentaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarVentaActionPerformed
-        if (DateChooser.getDate() == null) {
+        if (comboClientes.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente");
+        } else if (DateChooser.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Debe indicar la Fecha");
         } else {
             cargarCombo2();
@@ -324,6 +331,9 @@ public class VentaView extends javax.swing.JFrame {
             bloqueados();
             comboClientes.setEnabled(true);
             DateChooser.setEnabled(true);
+            comboProductos.setSelectedIndex(-1);
+            comboClientes.setSelectedIndex(-1);
+            DateChooser.setDate(null);
             listaDetalles.clear();
         } else {
             JOptionPane.showMessageDialog(null, "Quita todos los productos del carrito");
@@ -355,6 +365,8 @@ public class VentaView extends javax.swing.JFrame {
             bloqueados();
             comboClientes.setEnabled(true);
             DateChooser.setEnabled(true);
+            comboProductos.setSelectedIndex(-1);
+            comboClientes.setSelectedIndex(-1);
             DateChooser.setDate(null);
             listaDetalles.clear();
         }

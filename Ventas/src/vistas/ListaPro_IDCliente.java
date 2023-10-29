@@ -12,7 +12,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaPro_IDCliente extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }       
+    };
     ProductoDAO prodao = new ProductoDAO();
     ClienteDAO clidao = new ClienteDAO();
     List<Producto> productos = new ArrayList();

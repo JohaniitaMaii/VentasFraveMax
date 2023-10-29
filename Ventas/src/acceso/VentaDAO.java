@@ -50,6 +50,35 @@ public class VentaDAO {
 
     }
 
+    public Venta buscarVenta(int id) {//traigo una venta con id venta
+        Venta venta = null;
+        Cliente cliente = null;
+        Date fecha2 = new Date(0, 0, 0);
+        try {
+            conn = conexion.conexionDB();
+            sql = "SELECT * FROM venta WHERE id_venta = " + id;
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                cliente = new Cliente();
+                venta = new Venta(cliente, fecha2);
+                venta.setIdVenta(rs.getInt("id_venta"));
+                venta.getCliente().setIdCliente(rs.getInt("id_cliente"));
+                venta.setFechaVenta(rs.getDate("fechadeVenta"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al traer la Venta");
+        } finally {
+            try {
+                conexion.desconectar();
+            } catch (Exception ex) {
+                System.out.println("Error al desconectar");
+            }
+        }
+        return venta;
+    }
+
     public List<Venta> listarVentas() {//augusto
         Venta venta = null;
         Cliente cliente = null;
@@ -111,14 +140,13 @@ public class VentaDAO {
 
     }
 
-    public void eliminarVenta(Venta venta) {//augusto
-        detadao.eliminarDetalleVenta(venta.getIdVenta());
+     public void eliminarVenta(int id) {
 
         try {
             conn = conexion.conexionDB();
             sql = "DELETE FROM venta WHERE id_venta = ?";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, venta.getIdVenta());
+            ps.setInt(1, id);
             ps.executeUpdate();
             System.out.println("Venta eliminada");
         } catch (SQLException ex) {

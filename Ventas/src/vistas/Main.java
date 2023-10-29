@@ -20,7 +20,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Fraver Max");
+        setTitle("FraveMax");
 
     }
 
@@ -205,12 +205,13 @@ public class Main extends javax.swing.JFrame {
         MainAdmin admin = new MainAdmin();
         if (validar()) {
             try {
-                if (udao.ingresoLogin(txtUsuario.getText(), txtPassword.getText()) != null) {
+                if (udao.ingresoLogin(txtUsuario.getText(), txtPassword.getText())) {
                     JOptionPane.showMessageDialog(admin, "Sesion Iniciada");
                 admin.setVisible(true);
                 this.dispose();  
                 } else {
-                    JOptionPane.showMessageDialog(admin, "Datos no registrados en la Base de Datos");
+                    JOptionPane.showMessageDialog(admin, "Datos no registrados / Verifique Mayus-Minus");
+                    limpiar();
                 }  
             } catch (Exception ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -223,7 +224,6 @@ public class Main extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         VerProductos verp = new VerProductos();
         verp.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
@@ -285,6 +285,10 @@ public class Main extends javax.swing.JFrame {
         return false;
     }
 
+    public void limpiar(){
+        txtUsuario.setText("");
+        txtPassword.setText("");
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Base;

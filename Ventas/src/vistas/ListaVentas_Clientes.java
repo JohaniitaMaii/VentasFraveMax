@@ -18,8 +18,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListaVentas_Clientes extends javax.swing.JFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel();
-    private DefaultTableModel modelo2 = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }        
+    };
+    private DefaultTableModel modelo2 = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }        
+    };
     ClienteDAO clidao = new ClienteDAO();
     VentaDAO vedao = new VentaDAO();
     List<Venta> ventas = new ArrayList();
