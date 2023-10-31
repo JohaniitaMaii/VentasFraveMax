@@ -349,6 +349,7 @@ public class VentaView extends javax.swing.JFrame {
                 "Mensaje..!!",
                 JOptionPane.YES_NO_OPTION);
         if (pregunta == JOptionPane.YES_OPTION) {
+            double total = 0;
             Venta venta = new Venta();
             venta.setCliente((Cliente) comboClientes.getSelectedItem());
             java.util.Date fechaUTIL = DateChooser.getDate();
@@ -358,9 +359,10 @@ public class VentaView extends javax.swing.JFrame {
             Venta ve = vedao.traerVenta(venta);//traigo la venta recien realizada
             for (DetalleVenta deta : listaDetalles) {
                 deta.setVenta(ve);           //seteo la venta reciente a cada detalleVenta
+                total = total + deta.getPrecioTotal();
                 detadao.insertarDetalle(deta);
             }
-            JOptionPane.showMessageDialog(null, "Venta Exitosa!!");
+            JOptionPane.showMessageDialog(null, "Venta Exitosa!! \n Precio Total: $ "+total);
             modelo.setRowCount(0);
             bloqueados();
             comboClientes.setEnabled(true);
