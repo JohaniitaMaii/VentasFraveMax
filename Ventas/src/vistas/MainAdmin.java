@@ -71,6 +71,8 @@ public class MainAdmin extends javax.swing.JFrame {
         jMenuBar1.setForeground(new java.awt.Color(0, 51, 102));
         jMenuBar1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        jMenu1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
         jMenu1.setText("Administracion");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +114,8 @@ public class MainAdmin extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
         jMenu2.setText("Consultas de Listas");
 
         jMenuItem9.setText("Lista de Ventas x Fecha");
@@ -156,6 +160,8 @@ public class MainAdmin extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
         jMenu3.setText("Ayuda");
 
         jMenuItem1.setText("Contacto de Servicio");

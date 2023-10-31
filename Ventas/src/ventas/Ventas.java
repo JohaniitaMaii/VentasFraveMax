@@ -1,4 +1,4 @@
-package ventasMain;
+package ventas;
 
 import vistas.Main;
 
@@ -6,7 +6,7 @@ import vistas.Main;
  *
  * @author johan
  */
-public class VentasMain {
+public class Ventas {
 
     /**
      * @param args the command line arguments
